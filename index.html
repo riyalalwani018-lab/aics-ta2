@@ -1,0 +1,1536 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URLGuard — AI-Powered URL Threat Detection</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#4f46e5',
+              600: '#4338ca',
+              700: '#3730a3',
+            },
+            safe: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+            },
+            danger: {
+              50: '#fef2f2',
+              100: '#fee2e2',
+              500: '#ef4444',
+              600: '#dc2626',
+              700: '#b91c1c',
+            },
+            warning: {
+              50: '#fffbeb',
+              100: '#fef3c7',
+              500: '#f59e0b',
+              600: '#d97706',
+            },
+            slate: {
+              850: '#151f32',
+              900: '#0f172a',
+            }
+          },
+          animation: {
+            'pulse-subtle': 'pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'shimmer': 'shimmer 2s infinite linear',
+          },
+          keyframes: {
+            shimmer: {
+              '0%': { transform: 'translateX(-100%)' },
+              '100%': { transform: 'translateX(100%)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    .tab-active {
+      color: #4338ca;
+      background: #eef2ff;
+      border-color: #6366f1;
+    }
+  </style>
+</head>
+<body class="bg-[#f8fafc] text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-indigo-100 selection:text-indigo-800" data-new-gr-c-s-check-loaded="14.1348.0" data-gr-ext-installed="">
+
+  <!-- TOP HEADER / MOBILE NAV -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 px-4 py-3 flex items-center justify-between shadow-xs">
+    <div class="flex items-center gap-3">
+      <!-- Shield Logo Icon -->
+      <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-indigo-100">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"></path>
+        </svg>
+      </div>
+      <div>
+        <div class="flex items-center gap-1.5">
+          <span class="font-extrabold text-slate-900 tracking-tight text-lg leading-tight">URLGuard</span>
+          <span class="px-1.5 py-0.5 text-[10px] font-semibold bg-indigo-50 text-indigo-700 rounded border border-indigo-200/60 uppercase">ML v1.2</span>
+        </div>
+        <p class="text-[11px] text-slate-500 font-medium">AI-Powered URL Threat Detection</p>
+      </div>
+    </div>
+
+    <!-- System Status Pill & Demo Menu -->
+    <div class="flex items-center gap-2">
+      <div class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 border border-emerald-200/80 rounded-full text-xs font-medium text-emerald-700">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 -ml-2.5"></span>
+        <span>Model Online</span>
+      </div>
+      
+      <!-- Interactive Quick State Preset Button -->
+      <button onclick="togglePresetMenu()" class="text-xs font-semibold px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg border border-slate-200 flex items-center gap-1 transition">
+        <span>⚡ Switch State</span>
+        <svg class="w-3.5 h-3.5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- QUICK STATE SELECTION POPOVER / MODAL BAR -->
+  <div id="state-preset-bar" class="bg-slate-900 text-white px-4 py-2.5 border-b border-slate-800 text-xs flex flex-wrap items-center justify-between gap-2 shadow-lg transition-all">
+    <div class="flex items-center gap-2">
+      <span class="font-bold text-indigo-400">Jump to State:</span>
+      <span class="text-slate-400">Test all requirement flows quickly:</span>
+    </div>
+    <div class="flex flex-wrap items-center gap-1.5">
+      <button onclick="setAnalysisState('empty')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-slate-300">1. Empty</button>
+      <button onclick="setAnalysisState('prefill')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-slate-300">2. URL Typed</button>
+      <button onclick="setAnalysisState('loading')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-amber-300">3. Analyzing Step</button>
+      <button onclick="setAnalysisState('legitimate')" class="px-2 py-1 bg-emerald-900/60 hover:bg-emerald-900 border border-emerald-500/40 text-emerald-300 font-medium rounded">4. Safe (Legitimate)</button>
+      <button onclick="setAnalysisState('phishing')" class="px-2 py-1 bg-rose-900/60 hover:bg-rose-900 border border-rose-500/40 text-rose-300 font-medium rounded">5. Phishing (High Risk)</button>
+      <button onclick="setAnalysisState('error-invalid')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-orange-300">6. Error: Invalid URL</button>
+      <button onclick="setAnalysisState('error-backend')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-rose-400">7. Error: Service Offline</button>
+    </div>
+  </div>
+
+  <!-- NAVIGATION TABS (Segmented Control for Mobile/Tablet) -->
+  <nav class="bg-white border-b border-slate-200 px-3 py-2 overflow-x-auto no-scrollbar sticky top-[57px] z-30 flex items-center justify-between gap-1 shadow-2xs">
+    <div class="flex items-center gap-1 min-w-max mx-auto md:mx-0">
+      <button id="nav-analyzer" onclick="switchPage('analyzer')" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition tab-active">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+        URL Analyzer
+      </button>
+
+      <button id="nav-history" onclick="switchPage('history')" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold hover:text-slate-900 flex items-center gap-2 transition text-slate-600 hover:bg-slate-100">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        Analysis History
+        <span class="px-1.5 py-0.2 bg-slate-200 text-slate-700 text-[10px] rounded-full font-bold">14</span>
+      </button>
+
+      <button id="nav-performance" onclick="switchPage('performance')" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold hover:text-slate-900 flex items-center gap-2 transition text-slate-600 hover:bg-slate-100">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+        </svg>
+        Model Performance
+      </button>
+
+      <button id="nav-about" onclick="switchPage('about')" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold hover:text-slate-900 flex items-center gap-2 transition text-slate-600 hover:bg-slate-100">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        About &amp; UCI Dataset
+      </button>
+    </div>
+  </nav>
+
+  <!-- MAIN VIEWPORT CONTAINER -->
+  <main class="flex-1 max-w-5xl w-full mx-auto p-4 sm:p-6 pb-20">
+
+    <!-- ============================================================== -->
+    <!-- PAGE 1: URL ANALYZER (PRIMARY WORKBENCH)                        -->
+    <!-- ============================================================== -->
+    <div id="page-analyzer" class="space-y-6">
+
+      <!-- Header & Intro -->
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">URL Threat Analyzer</h1>
+            <span class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">PhiUSIIL 54-Features</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1">Analyze any web address using machine learning to detect phishing, spoofing, and malicious patterns.</p>
+        </div>
+        
+        <!-- Batch CSV Upload Trigger -->
+        
+      </div>
+
+      <!-- URL Input Box Card -->
+      <div class="bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400 p-[2px] rounded-3xl shadow-xl shadow-indigo-500/10 transition-all hover:shadow-indigo-500/20">
+  <div class="bg-white rounded-[22px] p-6 relative overflow-hidden backdrop-blur-xs">
+    <div class="absolute -top-16 -right-16 w-36 h-36 bg-gradient-to-br from-indigo-200/30 to-pink-200/20 rounded-full blur-2xl pointer-events-none"></div>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 relative z-10">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="flex h-2.5 w-2.5 relative">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500"></span>
+          </span>
+          <h2 class="text-base font-extrabold text-slate-900 tracking-tight">Live Threat URL Inspector</h2>
+        </div>
+        <p class="text-xs text-slate-500 mt-0.5">Enter a web address below and run real-time multi-dimensional structural feature analysis.</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="setSampleUrl('legitimate')" class="text-xs font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 rounded-xl transition border border-emerald-200/80 shadow-xs flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          Sample Safe
+        </button>
+        <button onclick="setSampleUrl('phishing')" class="text-xs font-bold text-rose-700 bg-rose-50 hover:bg-rose-100 px-3 py-1.5 rounded-xl transition border border-rose-200/80 shadow-xs flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"></span>
+          Sample Phishing
+        </button>
+      </div>
+    </div>
+
+    <div class="space-y-4 relative z-10">
+      <div class="relative flex flex-col sm:flex-row gap-2.5">
+        <div class="relative flex-1 group">
+          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none gap-2 text-slate-400">
+            <span class="px-2 py-0.5 text-[11px] font-mono font-bold bg-cyan-50 text-cyan-600 rounded-md border border-cyan-200/80 shadow-2xs">https://</span>
+          </div>
+          <input id="url-input" type="text" placeholder="example.com/secure-login" value="" class="w-full pl-24 pr-24 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-mono font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-4 focus:ring-indigo-500/15 focus:border-indigo-500 focus:bg-white transition shadow-inner">
+          <button onclick="clearInput()" id="clear-btn" class="hidden absolute inset-y-0 right-3 px-2 flex items-center text-xs font-medium text-slate-400 hover:text-slate-600">Clear</button>
+        </div>
+
+        <button id="analyze-btn" onclick="triggerAnalyze()" class="px-7 py-3.5 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 hover:from-indigo-500 hover:via-purple-500 hover:to-pink-400 active:scale-[0.99] text-white font-bold text-sm rounded-2xl shadow-lg shadow-indigo-500/25 flex items-center justify-center gap-2 transition duration-200 cursor-pointer">
+          <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+          <span>Analyze URL</span>
+        </button>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-slate-100">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-200/70 shadow-2xs">
+            <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+            54 PhiUSIIL Vectors
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold bg-purple-50 text-purple-700 border border-purple-200/70 shadow-2xs">
+            <span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
+            Shannon Entropy
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold bg-cyan-50 text-cyan-700 border border-cyan-200/70 shadow-2xs">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span>
+            Typosquat Detection
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/70 shadow-2xs">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            Neural Inference
+          </span>
+        </div>
+        <span class="text-[11px] font-mono text-slate-400 font-medium">PhiUSIIL UCI 235k Model</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <!-- ========================================== -->
+      <!-- STATE 1: EMPTY / PROMPT GUIDE (DEFAULT)     -->
+      <!-- ========================================== -->
+      <div id="state-empty" class="bg-gradient-to-b from-white via-indigo-50/20 to-purple-50/30 rounded-3xl border-2 border-dashed border-indigo-200/80 p-10 text-center space-y-4 shadow-sm relative overflow-hidden">
+  <div class="absolute -left-12 -bottom-12 w-40 h-40 bg-gradient-to-tr from-indigo-200/30 to-pink-200/20 rounded-full blur-2xl pointer-events-none"></div>
+  <div class="absolute -right-12 -top-12 w-40 h-40 bg-gradient-to-br from-cyan-200/30 to-purple-200/20 rounded-full blur-2xl pointer-events-none"></div>
+  
+  <div class="relative z-10 w-16 h-16 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 text-white mx-auto flex items-center justify-center shadow-lg shadow-indigo-500/20">
+    <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"></path>
+    </svg>
+  </div>
+  
+  <div class="relative z-10 space-y-1">
+    <h3 class="font-extrabold text-slate-900 text-lg tracking-tight">Ready to Scan for Phishing &amp; Spoofing</h3>
+    <p class="text-xs sm:text-sm text-slate-500 max-w-md mx-auto leading-relaxed">Enter any address above or try one of the calibrated reference samples to inspect algorithmic markers and explainable classification scores.</p>
+  </div>
+
+  <div class="pt-2 flex flex-wrap justify-center gap-3 relative z-10">
+    <button onclick="setSampleUrl('legitimate'); triggerAnalyze();" class="text-xs font-bold px-4 py-2 bg-gradient-to-r from-emerald-50 to-teal-50 hover:from-emerald-100 hover:to-teal-100 text-emerald-800 rounded-xl border border-emerald-200/80 shadow-xs flex items-center gap-2 transition">
+      <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+      Run Safe Test Sample
+    </button>
+    <button onclick="setSampleUrl('phishing'); triggerAnalyze();" class="text-xs font-bold px-4 py-2 bg-gradient-to-r from-rose-50 to-pink-50 hover:from-rose-100 hover:to-pink-100 text-rose-800 rounded-xl border border-rose-200/80 shadow-xs flex items-center gap-2 transition">
+      <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+      Run Phishing Threat Sample
+    </button>
+  </div>
+</div>
+
+      <!-- ========================================== -->
+      <!-- STATE 2: LOADING / STEP-WISE ML PIPELINE   -->
+      <!-- ========================================== -->
+      <div id="state-loading" class="bg-white rounded-2xl border border-indigo-200 p-6 shadow-sm space-y-5 animate-pulse-subtle hidden">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600">
+              <svg class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-900 text-sm">Analyzing URL with PhiUSIIL Pipeline...</h3>
+              <p id="loading-target-url" class="font-mono text-xs text-slate-500 truncate max-w-sm sm:max-w-md">http://secure-login-verification-account.xyz/verify</p>
+            </div>
+          </div>
+          <span class="text-xs font-mono font-semibold text-indigo-600 bg-indigo-50 px-2 py-1 rounded">Stage 3 of 4</span>
+        </div>
+
+        <!-- Sequential progress steps -->
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
+          <div class="flex items-center gap-2 p-2.5 bg-emerald-50 text-emerald-800 rounded-xl border border-emerald-200/80">
+            <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="font-medium">1. Extracting 54 Features</span>
+          </div>
+          <div class="flex items-center gap-2 p-2.5 bg-emerald-50 text-emerald-800 rounded-xl border border-emerald-200/80">
+            <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="font-medium">2. Feature Preprocessing</span>
+          </div>
+          <div class="flex items-center gap-2 p-2.5 bg-indigo-50 text-indigo-800 rounded-xl border border-indigo-200 animate-pulse">
+            <svg class="w-4 h-4 text-indigo-600 animate-spin shrink-0" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+            </svg>
+            <span class="font-semibold">3. Random Forest Inference</span>
+          </div>
+          <div class="flex items-center gap-2 p-2.5 bg-slate-50 text-slate-400 rounded-xl border border-slate-200">
+            <span class="w-4 h-4 rounded-full border border-slate-300 flex items-center justify-center text-[10px]">○</span>
+            <span>4. Risk Synthesis</span>
+          </div>
+        </div>
+
+        <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+          <div class="bg-indigo-600 h-1.5 rounded-full w-3/4 animate-pulse"></div>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- STATE 3: ANALYSIS RESULT (SAFE / LEGIT)   -->
+      <!-- ========================================== -->
+      <div id="result-legitimate" class="space-y-6 hidden">
+
+        <!-- Top Banner / Verdict Card -->
+        <div class="bg-gradient-to-br from-emerald-50 via-white to-emerald-50/40 rounded-2xl border-2 border-emerald-500/40 p-5 sm:p-6 shadow-xs relative overflow-hidden">
+          <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none"></div>
+          
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="flex items-start gap-4">
+              <div class="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-emerald-500 text-white flex items-center justify-center shadow-lg shadow-emerald-500/20 shrink-0">
+                <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300">Verdict</span>
+                  <h3 class="text-2xl font-black text-emerald-900 tracking-tight">LEGITIMATE</h3>
+                </div>
+                <p class="text-xs sm:text-sm text-emerald-800/80 mt-1 font-medium">This URL appears to be safe based on machine learning structural analysis.</p>
+                <div class="mt-2 font-mono text-xs text-slate-600 bg-white/80 border border-emerald-200/60 rounded-lg px-2.5 py-1 inline-block">
+                  Target: <span class="font-bold text-slate-800">https://www.example.com</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Risk & Confidence Badges -->
+            <div class="flex items-center gap-4 bg-white/90 border border-emerald-200/80 rounded-xl p-3.5 shadow-2xs self-stretch sm:self-auto justify-between sm:justify-start">
+              <div>
+                <div class="text-[11px] font-semibold text-slate-500">RISK LEVEL</div>
+                <div class="text-lg font-black text-emerald-600">LOW</div>
+              </div>
+              <div class="w-px h-8 bg-slate-200"></div>
+              <div>
+                <div class="text-[11px] font-semibold text-slate-500">ML CONFIDENCE</div>
+                <div class="text-lg font-black text-slate-900">98.4%</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Probability Bar Visualization -->
+          <div class="mt-5 pt-4 border-t border-emerald-200/50">
+            <div class="flex items-center justify-between text-xs font-semibold mb-1.5">
+              <span class="text-emerald-700">Legitimate Probability: 98.4%</span>
+              <span class="text-slate-400">Phishing Probability: 1.6%</span>
+            </div>
+            <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden flex">
+              <div class="bg-emerald-500 h-2.5 rounded-l-full transition-all duration-700" style="width: 98.4%"></div>
+              <div class="bg-rose-400 h-2.5 rounded-r-full transition-all duration-700" style="width: 1.6%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Explainable Indicators (Safe) -->
+        <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <h4 class="font-bold text-slate-900 text-sm">Why was this URL marked Legitimate?</h4>
+              <span class="text-[11px] font-semibold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded border border-emerald-200">Explainable AI</span>
+            </div>
+            <span class="text-[11px] text-slate-400">4 Model-Derived Checks</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="p-3 rounded-xl bg-emerald-50/50 border border-emerald-100 flex items-start gap-2.5">
+              <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">✓</div>
+              <div>
+                <p class="text-xs font-bold text-slate-900">Valid HTTPS Protocol</p>
+                <p class="text-[11px] text-slate-500 mt-0.5">TLS certificate present, secure standard port 443 with standard encryption.</p>
+              </div>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-50/50 border border-emerald-100 flex items-start gap-2.5">
+              <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">✓</div>
+              <div>
+                <p class="text-xs font-bold text-slate-900">Normal URL &amp; Domain Length</p>
+                <p class="text-[11px] text-slate-500 mt-0.5">22 characters falls safely within legitimate domain benchmark (avg 26).</p>
+              </div>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-50/50 border border-emerald-100 flex items-start gap-2.5">
+              <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">✓</div>
+              <div>
+                <p class="text-xs font-bold text-slate-900">No Raw IP Address Usage</p>
+                <p class="text-[11px] text-slate-500 mt-0.5">Host uses standard registered domain name, avoiding suspicious dotted quad notation.</p>
+              </div>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-50/50 border border-emerald-100 flex items-start gap-2.5">
+              <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">✓</div>
+              <div>
+                <p class="text-xs font-bold text-slate-900">Standard Subdomain Depth</p>
+                <p class="text-[11px] text-slate-500 mt-0.5">Single 'www' prefix, matching 99.1% of trusted web services in the PhiUSIIL dataset.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- URL Characteristics Data Grid (Safe) -->
+        <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h4 class="font-bold text-slate-900 text-sm">Extracted URL Characteristics</h4>
+              <p class="text-xs text-slate-500">Key features extracted from the 54 PhiUSIIL parameter vectors.</p>
+            </div>
+            <button onclick="toggleAllFeaturesModal(true)" class="text-xs font-semibold text-indigo-600 hover:text-indigo-800 bg-indigo-50 px-2.5 py-1 rounded-lg transition">View all 54 features →</button>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/70">
+              <div class="text-slate-400 text-[11px] font-medium">URL Length</div>
+              <div class="text-base font-bold text-slate-800 mt-0.5">22 chars</div>
+              <span class="inline-block mt-1 text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">Normal</span>
+            </div>
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/70">
+              <div class="text-slate-400 text-[11px] font-medium">Domain Length</div>
+              <div class="text-base font-bold text-slate-800 mt-0.5">11 chars</div>
+              <span class="inline-block mt-1 text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">Normal</span>
+            </div>
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/70">
+              <div class="text-slate-400 text-[11px] font-medium">HTTPS Protocol</div>
+              <div class="text-base font-bold text-emerald-600 mt-0.5">Enabled (Yes)</div>
+              <span class="inline-block mt-1 text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">Secure</span>
+            </div>
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/70">
+              <div class="text-slate-400 text-[11px] font-medium">Raw IP Address</div>
+              <div class="text-base font-bold text-slate-800 mt-0.5">No</div>
+              <span class="inline-block mt-1 text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">Safe</span>
+            </div>
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/70">
+              <div class="text-slate-400 text-[11px] font-medium">Subdomain Count</div>
+              <div class="text-base font-bold text-slate-800 mt-0.5">1 ('www')</div>
+              <span class="inline-block mt-1 text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">Normal</span>
+            </div>
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/70">
+              <div class="text-slate-400 text-[11px] font-medium">Special Characters</div>
+              <div class="text-base font-bold text-slate-800 mt-0.5">3 (Low)</div>
+              <span class="inline-block mt-1 text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">Standard</span>
+            </div>
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/70">
+              <div class="text-slate-400 text-[11px] font-medium">URL Similarity Score</div>
+              <div class="text-base font-bold text-slate-800 mt-0.5">0.04 (Low)</div>
+              <span class="inline-block mt-1 text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">No Typosquat</span>
+            </div>
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/70">
+              <div class="text-slate-400 text-[11px] font-medium">Shannon Entropy</div>
+              <div class="text-base font-bold text-slate-800 mt-0.5">3.12</div>
+              <span class="inline-block mt-1 text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">Natural</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ========================================== -->
+      <!-- STATE 4: ANALYSIS RESULT (PHISHING/DANGER) -->
+      <!-- ========================================== -->
+      <div id="result-phishing" class="space-y-6 hidden">
+
+        <!-- Top Phishing Banner Card -->
+        <div class="bg-gradient-to-br from-rose-50 via-white to-rose-50/50 rounded-2xl border-2 border-rose-500/50 p-5 sm:p-6 shadow-xs relative overflow-hidden">
+          <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-rose-500/10 rounded-full blur-2xl pointer-events-none"></div>
+          
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="flex items-start gap-4">
+              <div class="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-rose-600 text-white flex items-center justify-center shadow-lg shadow-rose-600/20 shrink-0">
+                <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                </svg>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800 border border-rose-300">Danger</span>
+                  <h3 class="text-2xl font-black text-rose-900 tracking-tight">PHISHING DETECTED</h3>
+                </div>
+                <p class="text-xs sm:text-sm text-rose-800/80 mt-1 font-medium">This URL exhibits severe structural indicators commonly associated with phishing attacks.</p>
+                <div class="mt-2 font-mono text-xs text-rose-700 bg-rose-50 border border-rose-200 rounded-lg px-2.5 py-1 inline-block break-all">
+                  Target: <span class="font-bold">http://secure-login-verification-account.xyz/verify</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Risk & Confidence Badges -->
+            <div class="flex items-center gap-4 bg-white/95 border border-rose-200 rounded-xl p-3.5 shadow-2xs self-stretch sm:self-auto justify-between sm:justify-start">
+              <div>
+                <div class="text-[11px] font-semibold text-slate-500">RISK LEVEL</div>
+                <div class="text-lg font-black text-rose-600">HIGH (9.6/10)</div>
+              </div>
+              <div class="w-px h-8 bg-slate-200"></div>
+              <div>
+                <div class="text-[11px] font-semibold text-slate-500">ML CONFIDENCE</div>
+                <div class="text-lg font-black text-rose-700">96.8%</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Probability Bar Visualization -->
+          <div class="mt-5 pt-4 border-t border-rose-200/60">
+            <div class="flex items-center justify-between text-xs font-semibold mb-1.5">
+              <span class="text-slate-400">Legitimate Probability: 3.2%</span>
+              <span class="text-rose-700">Phishing Probability: 96.8%</span>
+            </div>
+            <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden flex">
+              <div class="bg-emerald-400 h-2.5 rounded-l-full" style="width: 3.2%"></div>
+              <div class="bg-rose-600 h-2.5 rounded-r-full" style="width: 96.8%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Explainable Risk Indicators (Why was this flagged?) -->
+        <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <h4 class="font-bold text-slate-900 text-sm">Why was this URL flagged?</h4>
+              <span class="text-[11px] font-semibold bg-rose-50 text-rose-700 px-2 py-0.5 rounded border border-rose-200">Explainable Risk Engine</span>
+            </div>
+            <span class="text-[11px] text-rose-600 font-semibold">4 Critical Anomalies</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <!-- Indicator 1 -->
+            <div class="p-3.5 rounded-xl bg-rose-50/60 border border-rose-200 flex items-start gap-3">
+              <div class="w-6 h-6 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center shrink-0 text-xs font-bold mt-0.5">⚠</div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <p class="text-xs font-bold text-slate-900">Unusually Long URL (87 characters)</p>
+                  <span class="text-[9px] font-bold bg-rose-200 text-rose-800 px-1.5 py-0.2 rounded">Model Weight 0.28</span>
+                </div>
+                <p class="text-[11px] text-slate-600 mt-1">The URL length is significantly higher than typical legitimate endpoints in the PhiUSIIL dataset, often used to disguise intent.</p>
+              </div>
+            </div>
+
+            <!-- Indicator 2 -->
+            <div class="p-3.5 rounded-xl bg-rose-50/60 border border-rose-200 flex items-start gap-3">
+              <div class="w-6 h-6 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center shrink-0 text-xs font-bold mt-0.5">⚠</div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <p class="text-xs font-bold text-slate-900">Multiple Subdomains Detected (4 levels)</p>
+                  <span class="text-[9px] font-bold bg-rose-200 text-rose-800 px-1.5 py-0.2 rounded">Model Weight 0.24</span>
+                </div>
+                <p class="text-[11px] text-slate-600 mt-1">Suspicious nesting of multiple subdomain components (<code class="bg-rose-100/70 px-1 rounded">secure.login...</code>) mimicking trusted services.</p>
+              </div>
+            </div>
+
+            <!-- Indicator 3 -->
+            <div class="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200 flex items-start gap-3">
+              <div class="w-6 h-6 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 text-xs font-bold mt-0.5">!</div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <p class="text-xs font-bold text-slate-900">HTTPS Not Detected (Plain HTTP)</p>
+                  <span class="text-[9px] font-bold bg-amber-200 text-amber-900 px-1.5 py-0.2 rounded">Rule Indicator</span>
+                </div>
+                <p class="text-[11px] text-slate-600 mt-1">The URL transmits credentials in unencrypted cleartext on standard HTTP port 80.</p>
+              </div>
+            </div>
+
+            <!-- Indicator 4 -->
+            <div class="p-3.5 rounded-xl bg-rose-50/60 border border-rose-200 flex items-start gap-3">
+              <div class="w-6 h-6 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center shrink-0 text-xs font-bold mt-0.5">⚠</div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <p class="text-xs font-bold text-slate-900">Suspicious Brand Keyword Embedding</p>
+                  <span class="text-[9px] font-bold bg-rose-200 text-rose-800 px-1.5 py-0.2 rounded">Model Weight 0.19</span>
+                </div>
+                <p class="text-[11px] text-slate-600 mt-1">Embeds deceptive security terminology ('verification', 'account') inside untrusted generic TLD (.xyz).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- URL Feature Analysis Table (Expandable) -->
+        <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs">
+          <div class="flex items-center justify-between mb-3">
+            <div>
+              <h4 class="font-bold text-slate-900 text-sm">URL Feature Analysis (PhiUSIIL 54)</h4>
+              <p class="text-xs text-slate-500">Key algorithmic parameters fed into the Random Forest classifier.</p>
+            </div>
+            <button onclick="toggleAllFeaturesModal(true)" class="text-xs font-semibold text-indigo-600 hover:text-indigo-800 bg-indigo-50 px-2.5 py-1 rounded-lg transition">View all features →</button>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-50 text-slate-500 font-semibold border-y border-slate-200">
+                <tr>
+                  <th class="py-2.5 px-3">Feature Name</th>
+                  <th class="py-2.5 px-3">Extracted Value</th>
+                  <th class="py-2.5 px-3">Baseline Normal</th>
+                  <th class="py-2.5 px-3">Model Interpretation</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 font-mono">
+                <tr>
+                  <td class="py-2.5 px-3 font-sans font-medium text-slate-800">URLLength</td>
+                  <td class="py-2.5 px-3 text-rose-600 font-bold">87</td>
+                  <td class="py-2.5 px-3 text-slate-400">15 - 45</td>
+                  <td class="py-2.5 px-3 font-sans"><span class="px-2 py-0.5 rounded bg-rose-100 text-rose-800 font-semibold text-[10px]">High / Abnormal</span></td>
+                </tr>
+                <tr>
+                  <td class="py-2.5 px-3 font-sans font-medium text-slate-800">DomainLength</td>
+                  <td class="py-2.5 px-3 text-rose-600 font-bold">42</td>
+                  <td class="py-2.5 px-3 text-slate-400">8 - 20</td>
+                  <td class="py-2.5 px-3 font-sans"><span class="px-2 py-0.5 rounded bg-rose-100 text-rose-800 font-semibold text-[10px]">High Risk</span></td>
+                </tr>
+                <tr>
+                  <td class="py-2.5 px-3 font-sans font-medium text-slate-800">IsHTTPS</td>
+                  <td class="py-2.5 px-3 text-amber-600 font-bold">0 (No)</td>
+                  <td class="py-2.5 px-3 text-slate-400">1 (Yes)</td>
+                  <td class="py-2.5 px-3 font-sans"><span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-semibold text-[10px]">Warning</span></td>
+                </tr>
+                <tr>
+                  <td class="py-2.5 px-3 font-sans font-medium text-slate-800">NoOfSubDomain</td>
+                  <td class="py-2.5 px-3 text-rose-600 font-bold">4</td>
+                  <td class="py-2.5 px-3 text-slate-400">1</td>
+                  <td class="py-2.5 px-3 font-sans"><span class="px-2 py-0.5 rounded bg-rose-100 text-rose-800 font-semibold text-[10px]">High / Deep Nesting</span></td>
+                </tr>
+                <tr>
+                  <td class="py-2.5 px-3 font-sans font-medium text-slate-800">SpecialCharRatio</td>
+                  <td class="py-2.5 px-3 text-rose-600 font-bold">12 (0.138)</td>
+                  <td class="py-2.5 px-3 text-slate-400">&lt; 4</td>
+                  <td class="py-2.5 px-3 font-sans"><span class="px-2 py-0.5 rounded bg-rose-100 text-rose-800 font-semibold text-[10px]">Elevated</span></td>
+                </tr>
+                <tr>
+                  <td class="py-2.5 px-3 font-sans font-medium text-slate-800">HasIPAddress</td>
+                  <td class="py-2.5 px-3 text-slate-600">0 (No)</td>
+                  <td class="py-2.5 px-3 text-slate-400">0</td>
+                  <td class="py-2.5 px-3 font-sans"><span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-semibold text-[10px]">Normal</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ========================================== -->
+      <!-- STATE 5: ERROR STATES                      -->
+      <!-- ========================================== -->
+      <div id="state-error-invalid" class="bg-amber-50 border border-amber-200 rounded-2xl p-5 flex items-start gap-4 hidden">
+        <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+          </svg>
+        </div>
+        <div class="space-y-1">
+          <h4 class="font-bold text-amber-900 text-sm">Invalid URL Format</h4>
+          <p class="text-xs text-amber-700">Please enter a valid web address with proper domain format (e.g., <code class="bg-amber-100 px-1 rounded">https://example.com</code> or <code class="bg-amber-100 px-1 rounded">sub.domain.org/path</code>) and try again.</p>
+          <button onclick="setSampleUrl('legitimate')" class="text-xs font-semibold text-amber-800 underline mt-2 block">Try with sample valid URL</button>
+        </div>
+      </div>
+
+      <div id="state-error-backend" class="bg-rose-50 border border-rose-200 rounded-2xl p-5 flex items-start gap-4 hidden">
+        <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center shrink-0">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636a9 9 0 010 12.728m0 0l-2.829-2.829m2.829 2.829L21 21M15.536 8.464a5 5 0 010 7.072m0 0l-2.829-2.829m-4.243 4.243a9 9 0 01-2.828-6.364 9 9 0 012.828-6.364"></path>
+          </svg>
+        </div>
+        <div class="space-y-1">
+          <h4 class="font-bold text-rose-900 text-sm">Analysis Service Unavailable</h4>
+          <p class="text-xs text-rose-700">We couldn't connect to the machine learning inference backend daemon. Please verify that your local Scikit-learn API service is running on port 8000.</p>
+          <div class="flex items-center gap-2 mt-2">
+            <button onclick="triggerAnalyze()" class="text-xs font-semibold px-2.5 py-1 bg-rose-600 hover:bg-rose-700 text-white rounded-md transition">Retry Inference</button>
+            <span class="text-[11px] text-rose-500 font-mono">ERR_CONNECTION_REFUSED</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- PAGE 2: ANALYSIS HISTORY (TABLE & FILTERING)                   -->
+    <!-- ============================================================== -->
+    <div id="page-history" class="space-y-6 hidden">
+
+      <!-- History Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+        <div>
+          <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Analysis History</h1>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1">Review previously analyzed URLs, classification probabilities, and inspect raw markers.</p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button onclick="toggleHistoryEmptyState()" id="history-toggle-empty-btn" class="text-xs font-semibold px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg border border-slate-200 transition">Toggle Empty State</button>
+          <button onclick="clearHistoryTable()" class="text-xs font-semibold px-2.5 py-1.5 text-rose-600 hover:bg-rose-50 rounded-lg border border-rose-200 transition">Clear History</button>
+        </div>
+      </div>
+
+      <!-- Filters & Search Toolbar -->
+      <div class="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-xs flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
+        <div class="relative flex-1">
+          <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+          <input type="text" id="history-search" oninput="filterHistoryTable()" placeholder="Search by URL or domain..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition">
+        </div>
+
+        <div class="flex items-center gap-2">
+          <select id="history-prediction-filter" onchange="filterHistoryTable()" class="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/20">
+            <option value="ALL">All Predictions</option>
+            <option value="LEGITIMATE">Legitimate Only</option>
+            <option value="PHISHING">Phishing Only</option>
+          </select>
+
+          <select id="history-risk-filter" onchange="filterHistoryTable()" class="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/20">
+            <option value="ALL">All Risk Levels</option>
+            <option value="LOW">Low Risk</option>
+            <option value="HIGH">High Risk</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- History Table Container -->
+      <div id="history-table-container" class="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-50 text-slate-600 font-semibold border-b border-slate-200">
+              <tr>
+                <th class="py-3 px-4">Analyzed URL</th>
+                <th class="py-3 px-4">Prediction</th>
+                <th class="py-3 px-4">ML Confidence</th>
+                <th class="py-3 px-4">Risk Level</th>
+                <th class="py-3 px-4">Timestamp</th>
+                <th class="py-3 px-4 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody id="history-tbody" class="divide-y divide-slate-100">
+              <tr class="hover:bg-slate-50/80 transition" data-pred="LEGITIMATE" data-risk="LOW">
+                <td class="py-3 px-4 font-mono font-medium text-slate-800">https://google.com</td>
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">LEGITIMATE</span>
+                </td>
+                <td class="py-3 px-4 font-mono font-bold text-slate-800">99.1%</td>
+                <td class="py-3 px-4"><span class="text-emerald-600 font-semibold">Low</span></td>
+                <td class="py-3 px-4 text-slate-400">Today, 10:42 AM</td>
+                <td class="py-3 px-4 text-right">
+                  <button onclick="viewHistoryDetail('https://google.com', 'LEGITIMATE', '99.1%', 'Low')" class="text-indigo-600 hover:text-indigo-800 font-semibold">Details</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50/80 transition" data-pred="PHISHING" data-risk="HIGH">
+                <td class="py-3 px-4 font-mono font-medium text-rose-700">http://suspicious-login.xyz/auth</td>
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-800">PHISHING</span>
+                </td>
+                <td class="py-3 px-4 font-mono font-bold text-slate-800">97.4%</td>
+                <td class="py-3 px-4"><span class="text-rose-600 font-semibold">High</span></td>
+                <td class="py-3 px-4 text-slate-400">Today, 10:15 AM</td>
+                <td class="py-3 px-4 text-right">
+                  <button onclick="viewHistoryDetail('http://suspicious-login.xyz/auth', 'PHISHING', '97.4%', 'High')" class="text-indigo-600 hover:text-indigo-800 font-semibold">Details</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50/80 transition" data-pred="LEGITIMATE" data-risk="LOW">
+                <td class="py-3 px-4 font-mono font-medium text-slate-800">https://example.org</td>
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">LEGITIMATE</span>
+                </td>
+                <td class="py-3 px-4 font-mono font-bold text-slate-800">98.6%</td>
+                <td class="py-3 px-4"><span class="text-emerald-600 font-semibold">Low</span></td>
+                <td class="py-3 px-4 text-slate-400">Yesterday, 4:20 PM</td>
+                <td class="py-3 px-4 text-right">
+                  <button onclick="viewHistoryDetail('https://example.org', 'LEGITIMATE', '98.6%', 'Low')" class="text-indigo-600 hover:text-indigo-800 font-semibold">Details</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50/80 transition" data-pred="PHISHING" data-risk="HIGH">
+                <td class="py-3 px-4 font-mono font-medium text-rose-700">http://paypal-verification-center.net/login</td>
+                <td class="py-3 px-4">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-800">PHISHING</span>
+                </td>
+                <td class="py-3 px-4 font-mono font-bold text-slate-800">98.9%</td>
+                <td class="py-3 px-4"><span class="text-rose-600 font-semibold">High</span></td>
+                <td class="py-3 px-4 text-slate-400">Yesterday, 2:10 PM</td>
+                <td class="py-3 px-4 text-right">
+                  <button onclick="viewHistoryDetail('http://paypal-verification-center.net/login', 'PHISHING', '98.9%', 'High')" class="text-indigo-600 hover:text-indigo-800 font-semibold">Details</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- History Empty State (Hidden by default, can toggle) -->
+      <div id="history-empty-view" class="hidden bg-white rounded-2xl border border-dashed border-slate-300 p-10 text-center space-y-3">
+        <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-400 mx-auto flex items-center justify-center">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h3 class="font-bold text-slate-800 text-base">No analyses yet</h3>
+        <p class="text-xs text-slate-500 max-w-sm mx-auto">URLs you analyze will appear here with complete historical inference records and feature breakdowns.</p>
+        <button onclick="switchPage('analyzer')" class="text-xs font-semibold px-3.5 py-2 bg-indigo-600 text-white rounded-xl shadow-xs hover:bg-indigo-700 transition">Go to URL Analyzer</button>
+      </div>
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- PAGE 3: MODEL PERFORMANCE (ACADEMIC ML EVALUATION)             -->
+    <!-- ============================================================== -->
+    <div id="page-performance" class="space-y-6 hidden">
+
+      <!-- Header & Dataset Stats -->
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Model Performance &amp; Analytics</h1>
+            <span class="text-xs font-semibold px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-700 border border-indigo-200">UCI Benchmark</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1">Evaluate and compare the machine learning models trained on the PhiUSIIL Phishing URL dataset.</p>
+        </div>
+        
+        <span class="self-start sm:self-auto text-xs font-semibold px-2.5 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg">80/20 Train-Test Split</span>
+      </div>
+
+      <!-- Top Summary Cards -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
+          <div class="text-[11px] font-semibold text-slate-400">DATASET SIZE</div>
+          <div class="text-xl sm:text-2xl font-black text-slate-900 mt-1">235,795</div>
+          <div class="text-[11px] text-slate-500 mt-0.5">UCI URL Instances</div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
+          <div class="text-[11px] font-semibold text-slate-400">EXTRACTED FEATURES</div>
+          <div class="text-xl sm:text-2xl font-black text-indigo-600 mt-1">54</div>
+          <div class="text-[11px] text-slate-500 mt-0.5">Continuous &amp; Binary</div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
+          <div class="text-[11px] font-semibold text-slate-400">CLASSIFICATION</div>
+          <div class="text-xl sm:text-2xl font-black text-slate-900 mt-1">2 Classes</div>
+          <div class="text-[11px] text-slate-500 mt-0.5">Legitimate vs Phishing</div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
+          <div class="text-[11px] font-semibold text-slate-400">OPTIMAL MODEL</div>
+          <div class="text-xl sm:text-2xl font-black text-emerald-600 mt-1">Random Forest</div>
+          <div class="text-[11px] text-emerald-700 font-semibold mt-0.5">F1-Score: 0.982</div>
+        </div>
+      </div>
+
+      <!-- Model Comparison Table -->
+      <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
+        <div class="p-4 border-b border-slate-100 flex items-center justify-between">
+          <div>
+            <h3 class="font-bold text-slate-900 text-sm">Model Comparison Benchmark</h3>
+            <p class="text-xs text-slate-500">Evaluation on test split (47,159 unseen URLs).</p>
+          </div>
+          <span class="text-[11px] font-mono text-slate-400">K-Fold CV (k=5)</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-50 text-slate-600 font-semibold border-b border-slate-200">
+              <tr>
+                <th class="py-3 px-4">Model Architecture</th>
+                <th class="py-3 px-4">Accuracy</th>
+                <th class="py-3 px-4">Precision</th>
+                <th class="py-3 px-4">Recall</th>
+                <th class="py-3 px-4">F1 Score</th>
+                <th class="py-3 px-4">Inference Latency</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 font-mono">
+              <tr class="bg-emerald-50/30">
+                <td class="py-3 px-4 font-sans font-bold text-slate-900 flex items-center gap-2">
+                  <span>Random Forest (Deployed)</span>
+                  <span class="px-1.5 py-0.2 bg-emerald-100 text-emerald-800 text-[10px] rounded font-bold">Best</span>
+                </td>
+                <td class="py-3 px-4 font-bold text-emerald-700">98.24%</td>
+                <td class="py-3 px-4 text-slate-700">0.984</td>
+                <td class="py-3 px-4 text-slate-700">0.981</td>
+                <td class="py-3 px-4 font-bold text-emerald-700">0.982</td>
+                <td class="py-3 px-4 text-slate-500">~14ms</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-sans font-medium text-slate-800">Decision Tree (CART)</td>
+                <td class="py-3 px-4 text-slate-700">95.12%</td>
+                <td class="py-3 px-4 text-slate-700">0.948</td>
+                <td class="py-3 px-4 text-slate-700">0.954</td>
+                <td class="py-3 px-4 text-slate-700">0.951</td>
+                <td class="py-3 px-4 text-slate-500">~6ms</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-sans font-medium text-slate-800">Support Vector Machine (SVM, RBF)</td>
+                <td class="py-3 px-4 text-slate-700">94.38%</td>
+                <td class="py-3 px-4 text-slate-700">0.941</td>
+                <td class="py-3 px-4 text-slate-700">0.947</td>
+                <td class="py-3 px-4 text-slate-700">0.944</td>
+                <td class="py-3 px-4 text-slate-500">~68ms</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-sans font-medium text-slate-800">Logistic Regression (L2)</td>
+                <td class="py-3 px-4 text-slate-700">91.80%</td>
+                <td class="py-3 px-4 text-slate-700">0.912</td>
+                <td class="py-3 px-4 text-slate-700">0.925</td>
+                <td class="py-3 px-4 text-slate-700">0.918</td>
+                <td class="py-3 px-4 text-slate-500">~4ms</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Visualizations Grid: Confusion Matrix & ROC Curve -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Confusion Matrix Card -->
+        <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h4 class="font-bold text-slate-900 text-sm">Confusion Matrix (Random Forest)</h4>
+              <p class="text-xs text-slate-500">Test set evaluations across 47,159 sample URLs</p>
+            </div>
+            <span class="text-[11px] font-mono bg-slate-100 text-slate-600 px-2 py-0.5 rounded">Accuracy 98.2%</span>
+          </div>
+
+          <!-- Heatmap Matrix -->
+          <div class="space-y-2">
+            <div class="grid grid-cols-3 gap-2 text-center text-xs">
+              <div class="p-2 text-slate-400 font-medium">Actual \ Pred</div>
+              <div class="p-2 font-bold text-slate-700 bg-slate-100 rounded-lg">Pred Legitimate</div>
+              <div class="p-2 font-bold text-slate-700 bg-slate-100 rounded-lg">Pred Phishing</div>
+
+              <div class="p-2 font-bold text-slate-700 bg-slate-100 rounded-lg flex items-center justify-center">Act Legitimate</div>
+              <div class="p-3 bg-emerald-100 border border-emerald-300 text-emerald-900 rounded-xl font-mono font-bold">
+                <div class="text-base sm:text-lg">23,120</div>
+                <div class="text-[10px] text-emerald-700 font-sans">True Negative (98.6%)</div>
+              </div>
+              <div class="p-3 bg-rose-50 border border-rose-200 text-rose-850 rounded-xl font-mono">
+                <div class="text-base sm:text-lg font-bold text-rose-700">328</div>
+                <div class="text-[10px] text-rose-600 font-sans">False Positive</div>
+              </div>
+
+              <div class="p-2 font-bold text-slate-700 bg-slate-100 rounded-lg flex items-center justify-center">Act Phishing</div>
+              <div class="p-3 bg-rose-50 border border-rose-200 text-rose-850 rounded-xl font-mono">
+                <div class="text-base sm:text-lg font-bold text-rose-700">501</div>
+                <div class="text-[10px] text-rose-600 font-sans">False Negative</div>
+              </div>
+              <div class="p-3 bg-indigo-100 border border-indigo-300 text-indigo-900 rounded-xl font-mono font-bold">
+                <div class="text-base sm:text-lg">23,210</div>
+                <div class="text-[10px] text-indigo-700 font-sans">True Positive (97.9%)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ROC Curve Card -->
+        <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs">
+          <div class="flex items-center justify-between mb-2">
+            <div>
+              <h4 class="font-bold text-slate-900 text-sm">ROC-AUC Curve</h4>
+              <p class="text-xs text-slate-500">Receiver Operating Characteristic across thresholds</p>
+            </div>
+            <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">AUC = 0.994</span>
+          </div>
+
+          <!-- SVG ROC-AUC Visualization -->
+          <div class="relative w-full h-44 sm:h-48 pt-2">
+            <svg class="w-full h-full overflow-visible" viewBox="0 0 300 160">
+              <!-- Grid lines -->
+              <line x1="30" y1="10" x2="290" y2="10" stroke="#f1f5f9" stroke-dasharray="3"></line>
+              <line x1="30" y1="50" x2="290" y2="50" stroke="#f1f5f9" stroke-dasharray="3"></line>
+              <line x1="30" y1="90" x2="290" y2="90" stroke="#f1f5f9" stroke-dasharray="3"></line>
+              <line x1="30" y1="130" x2="290" y2="130" stroke="#cbd5e1"></line>
+              <line x1="30" y1="10" x2="30" y2="130" stroke="#cbd5e1"></line>
+              
+              <!-- Diagonal baseline (chance) -->
+              <line x1="30" y1="130" x2="290" y2="10" stroke="#94a3b8" stroke-dasharray="4" stroke-width="1.5"></line>
+              
+              <!-- ROC Curve (High AUC) -->
+              <path d="M 30 130 C 35 30, 80 14, 290 10" fill="none" stroke="#4f46e5" stroke-width="3.5" stroke-linecap="round"></path>
+              
+              <!-- Shaded Area under curve -->
+              <path d="M 30 130 C 35 30, 80 14, 290 10 L 290 130 Z" fill="rgba(79, 70, 229, 0.08)"></path>
+
+              <!-- Labels -->
+              <text x="35" y="25" fill="#4f46e5" font-size="10" font-weight="700">Random Forest (0.994)</text>
+              <text x="175" y="100" fill="#94a3b8" font-size="9">Random Chance (0.50)</text>
+              <text x="135" y="152" fill="#64748b" font-size="9">False Positive Rate</text>
+              <text x="5" y="75" fill="#64748b" font-size="9" transform="rotate(-90 15,75)">True Positive Rate</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature Importance Chart -->
+      <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h4 class="font-bold text-slate-900 text-sm">Feature Importance (Top 5 PhiUSIIL Predictors)</h4>
+            <p class="text-xs text-slate-500">Gini-impurity contribution during Random Forest tree splits.</p>
+          </div>
+          <span class="text-xs font-semibold text-slate-500">MDI Score</span>
+        </div>
+
+        <div class="space-y-3 text-xs">
+          <div>
+            <div class="flex justify-between mb-1">
+              <span class="font-medium text-slate-700">1. URL Length (URLLength)</span>
+              <span class="font-mono font-bold text-indigo-600">0.248</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-2">
+              <div class="bg-indigo-600 h-2 rounded-full" style="width: 82%"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between mb-1">
+              <span class="font-medium text-slate-700">2. Domain Length (DomainLength)</span>
+              <span class="font-mono font-bold text-indigo-600">0.194</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-2">
+              <div class="bg-indigo-600 h-2 rounded-full" style="width: 64%"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between mb-1">
+              <span class="font-medium text-slate-700">3. IsHTTPS (Protocol Encryption)</span>
+              <span class="font-mono font-bold text-indigo-600">0.162</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-2">
+              <div class="bg-indigo-600 h-2 rounded-full" style="width: 53%"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between mb-1">
+              <span class="font-medium text-slate-700">4. Number of Subdomains (NoOfSubDomain)</span>
+              <span class="font-mono font-bold text-indigo-600">0.128</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-2">
+              <div class="bg-indigo-600 h-2 rounded-full" style="width: 42%"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between mb-1">
+              <span class="font-medium text-slate-700">5. Special Characters Count (NoOfSpecialChars)</span>
+              <span class="font-mono font-bold text-indigo-600">0.095</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-2">
+              <div class="bg-indigo-600 h-2 rounded-full" style="width: 31%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- PAGE 4: ABOUT & UCI DATASET (ACADEMIC SPECIFICATION)           -->
+    <!-- ============================================================== -->
+    <div id="page-about" class="space-y-6 hidden">
+
+      <!-- Academic Banner -->
+      <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white p-6 sm:p-8 rounded-2xl shadow-md">
+        <div class="max-w-2xl space-y-2">
+          <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-semibold border border-indigo-400/30">
+            <span>University Capstone Project</span>
+            <span>•</span>
+            <span>AI for Cyber Security</span>
+          </div>
+          <h1 class="text-xl sm:text-3xl font-extrabold tracking-tight">Malicious URL Detection Using Machine Learning</h1>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed pt-1">URLGuard is a cyber threat defense application designed to accurately identify phishing, deceptive, and malicious web locations in real time using extracted lexical and structural markers.</p>
+        </div>
+      </div>
+
+      <!-- Problem & Objective Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs space-y-2">
+          <div class="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center font-bold text-sm">!</div>
+          <h3 class="font-bold text-slate-900 text-base">The Cyber Threat Problem</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Phishing URLs are engineered to deceive users and redirect them to fraudulent login pages, credential harvesters, or malware download drops. Modern attackers frequently employ algorithmic URL generators, deep subdomain nesting, and typosquatting that bypass simple blacklist defenses.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs space-y-2">
+          <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-sm">🎯</div>
+          <h3 class="font-bold text-slate-900 text-base">Core Project Objective</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Develop an end-to-end machine learning pipeline that extracts 54 distinct features from input URLs and accurately predicts binary threat classifications (Legitimate vs Phishing) with explainable risk indicators for security operations analysts.</p>
+        </div>
+      </div>
+
+      <!-- Dataset Specification: PhiUSIIL -->
+      <div class="bg-white rounded-2xl border border-slate-200/80 p-5 sm:p-6 shadow-xs space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-slate-100 pb-3">
+          <div>
+            <h3 class="font-bold text-slate-900 text-base">PhiUSIIL Phishing URL Dataset</h3>
+            <p class="text-xs text-slate-500">Hosted on the UCI Machine Learning Repository</p>
+          </div>
+          <span class="text-xs font-mono bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg">UCI Repository Citation</span>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+            <span class="text-slate-400">Total Instances</span>
+            <div class="text-base font-bold text-slate-900 mt-0.5">235,795 URLs</div>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+            <span class="text-slate-400">Feature Count</span>
+            <div class="text-base font-bold text-indigo-600 mt-0.5">54 Features</div>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+            <span class="text-slate-400">Class Balance</span>
+            <div class="text-base font-bold text-emerald-600 mt-0.5">~50% Safe / ~50% Phish</div>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+            <span class="text-slate-400">Feature Classes</span>
+            <div class="text-base font-bold text-slate-900 mt-0.5">Lexical + Webpage</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- End-to-End Machine Learning Pipeline Architecture -->
+      <div class="bg-white rounded-2xl border border-slate-200/80 p-5 sm:p-6 shadow-xs space-y-4">
+        <h3 class="font-bold text-slate-900 text-base">Machine Learning Pipeline Workflow</h3>
+        <p class="text-xs text-slate-500">The continuous processing lifecycle from raw string inputs to explainable risk vectors.</p>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-center">
+            <div class="font-mono text-slate-400 text-[10px]">STEP 1</div>
+            <div class="font-bold text-slate-800 mt-1">Raw Dataset</div>
+            <div class="text-[11px] text-slate-500">235k UCI Corpus</div>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-center">
+            <div class="font-mono text-slate-400 text-[10px]">STEP 2</div>
+            <div class="font-bold text-slate-800 mt-1">Data Cleaning</div>
+            <div class="text-[11px] text-slate-500">De-duplication &amp; Nulls</div>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-center">
+            <div class="font-mono text-slate-400 text-[10px]">STEP 3</div>
+            <div class="font-bold text-slate-800 mt-1">Feature Engineering</div>
+            <div class="text-[11px] text-slate-500">54 Structural Markers</div>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-center">
+            <div class="font-mono text-slate-400 text-[10px]">STEP 4</div>
+            <div class="font-bold text-slate-800 mt-1">Train/Test Split</div>
+            <div class="text-[11px] text-slate-500">80% Train, 20% Test</div>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-center">
+            <div class="font-mono text-slate-400 text-[10px]">STEP 5</div>
+            <div class="font-bold text-slate-800 mt-1">Model Training</div>
+            <div class="text-[11px] text-slate-500">RF, SVM, CART, LR</div>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-center">
+            <div class="font-mono text-slate-400 text-[10px]">STEP 6</div>
+            <div class="font-bold text-slate-800 mt-1">Model Evaluation</div>
+            <div class="text-[11px] text-slate-500">ROC, AUC &amp; F1</div>
+          </div>
+          <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-center">
+            <div class="font-mono text-emerald-700 text-[10px]">STEP 7</div>
+            <div class="font-bold text-emerald-900 mt-1">Model Selection</div>
+            <div class="text-[11px] text-emerald-700 font-medium">Random Forest</div>
+          </div>
+          <div class="p-3 bg-indigo-50 rounded-xl border border-indigo-200 text-center">
+            <div class="font-mono text-indigo-700 text-[10px]">STEP 8</div>
+            <div class="font-bold text-indigo-900 mt-1">Real-Time Engine</div>
+            <div class="text-[11px] text-indigo-700 font-medium">&lt; 15ms Inference</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Technology Stack -->
+      <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-xs">
+        <h3 class="font-bold text-slate-900 text-base mb-3">Academic Technology Stack</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+          <div class="p-3 bg-slate-50 rounded-xl">
+            <span class="text-slate-400 font-medium">Frontend Stack</span>
+            <div class="font-bold text-slate-800 mt-1">HTML5 / TailwindCSS / Vanilla JS</div>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl">
+            <span class="text-slate-400 font-medium">Backend Daemon</span>
+            <div class="font-bold text-slate-800 mt-1">Python 3.11 / FastAPI</div>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl">
+            <span class="text-slate-400 font-medium">ML Framework</span>
+            <div class="font-bold text-slate-800 mt-1">Scikit-learn, NumPy, Pandas</div>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl">
+            <span class="text-slate-400 font-medium">Dataset Source</span>
+            <div class="font-bold text-slate-800 mt-1">UCI Machine Learning Repository</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ============================================================== -->
+  <!-- MODALS & OVERLAYS                                              -->
+  <!-- ============================================================== -->
+
+  <!-- CSV BATCH UPLOAD MODAL -->
+  
+
+  <!-- ALL 54 FEATURES DETAIL MODAL -->
+  <div id="modal-all-features" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full p-6 space-y-4 shadow-2xl border border-slate-100 max-h-[85vh] flex flex-col">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div>
+          <h3 class="font-bold text-slate-900 text-base">PhiUSIIL 54 Feature Vectors</h3>
+          <p class="text-xs text-slate-500">Complete extracted vector representations for current URL</p>
+        </div>
+        <button onclick="toggleAllFeaturesModal(false)" class="text-slate-400 hover:text-slate-600 p-1">✕</button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto pr-1">
+        <table class="w-full text-left text-xs font-mono">
+          <thead class="bg-slate-50 text-slate-500 font-semibold sticky top-0">
+            <tr>
+              <th class="py-2 px-3">#</th>
+              <th class="py-2 px-3">Feature Name</th>
+              <th class="py-2 px-3">Extracted Value</th>
+              <th class="py-2 px-3 font-sans">Type</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr><td class="py-1.5 px-3 text-slate-400">1</td><td class="py-1.5 px-3 font-medium">URLLength</td><td class="py-1.5 px-3 text-indigo-600">87</td><td class="py-1.5 px-3 font-sans text-slate-500">Integer</td></tr>
+            <tr><td class="py-1.5 px-3 text-slate-400">2</td><td class="py-1.5 px-3 font-medium">DomainLength</td><td class="py-1.5 px-3 text-indigo-600">42</td><td class="py-1.5 px-3 font-sans text-slate-500">Integer</td></tr>
+            <tr><td class="py-1.5 px-3 text-slate-400">3</td><td class="py-1.5 px-3 font-medium">IsDomainIP</td><td class="py-1.5 px-3">0</td><td class="py-1.5 px-3 font-sans text-slate-500">Binary</td></tr>
+            <tr><td class="py-1.5 px-3 text-slate-400">4</td><td class="py-1.5 px-3 font-medium">TLDLength</td><td class="py-1.5 px-3">3</td><td class="py-1.5 px-3 font-sans text-slate-500">Integer</td></tr>
+            <tr><td class="py-1.5 px-3 text-slate-400">5</td><td class="py-1.5 px-3 font-medium">NoOfSubDomain</td><td class="py-1.5 px-3 text-rose-600 font-bold">4</td><td class="py-1.5 px-3 font-sans text-slate-500">Integer</td></tr>
+            <tr><td class="py-1.5 px-3 text-slate-400">6</td><td class="py-1.5 px-3 font-medium">NoOfLettersInURL</td><td class="py-1.5 px-3">68</td><td class="py-1.5 px-3 font-sans text-slate-500">Integer</td></tr>
+            <tr><td class="py-1.5 px-3 text-slate-400">7</td><td class="py-1.5 px-3 font-medium">LetterRatioInURL</td><td class="py-1.5 px-3">0.781</td><td class="py-1.5 px-3 font-sans text-slate-500">Float</td></tr>
+            <tr><td class="py-1.5 px-3 text-slate-400">8</td><td class="py-1.5 px-3 font-medium">NoOfDigitsInURL</td><td class="py-1.5 px-3">0</td><td class="py-1.5 px-3 font-sans text-slate-500">Integer</td></tr>
+            <tr><td class="py-1.5 px-3 text-slate-400">9</td><td class="py-1.5 px-3 font-medium">NoOfSpecialChars</td><td class="py-1.5 px-3 text-rose-600 font-bold">12</td><td class="py-1.5 px-3 font-sans text-slate-500">Integer</td></tr>
+            <tr><td class="py-1.5 px-3 text-slate-400">10</td><td class="py-1.5 px-3 font-medium">IsHTTPS</td><td class="py-1.5 px-3 text-amber-600">0</td><td class="py-1.5 px-3 font-sans text-slate-500">Binary</td></tr>
+            <tr><td class="py-1.5 px-3 text-slate-400">11</td><td class="py-1.5 px-3 font-medium">SpCharRatioInURL</td><td class="py-1.5 px-3">0.138</td><td class="py-1.5 px-3 font-sans text-slate-500">Float</td></tr>
+            <tr><td class="py-1.5 px-3 text-slate-400">12</td><td class="py-1.5 px-3 font-medium">URLSimilarityIndex</td><td class="py-1.5 px-3 text-rose-600 font-bold">0.82</td><td class="py-1.5 px-3 font-sans text-slate-500">Float</td></tr>
+            <tr><td class="py-1.5 px-3 text-slate-400">13</td><td class="py-1.5 px-3 font-medium">ShannonEntropy</td><td class="py-1.5 px-3">4.21</td><td class="py-1.5 px-3 font-sans text-slate-500">Float</td></tr>
+            <tr><td class="py-1.5 px-3 text-slate-400">14</td><td class="py-1.5 px-3 font-medium">HasHyphens</td><td class="py-1.5 px-3 text-rose-600 font-bold">3</td><td class="py-1.5 px-3 font-sans text-slate-500">Integer</td></tr>
+            <tr><td class="py-1.5 px-3 text-slate-400">15</td><td class="py-1.5 px-3 font-medium">HasAtSymbol</td><td class="py-1.5 px-3">0</td><td class="py-1.5 px-3 font-sans text-slate-500">Binary</td></tr>
+            <tr><td class="py-1.5 px-3 text-slate-400">16</td><td class="py-1.5 px-3 font-medium">HasTilde</td><td class="py-1.5 px-3">0</td><td class="py-1.5 px-3 font-sans text-slate-500">Binary</td></tr>
+            <tr><td class="py-1.5 px-3 text-slate-400">...</td><td class="py-1.5 px-3 italic text-slate-400">38 Additional UCI Markers</td><td class="py-1.5 px-3 text-slate-400">Vectors Loaded</td><td class="py-1.5 px-3 font-sans text-slate-400">Continuous</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pt-2 text-right">
+        <button onclick="toggleAllFeaturesModal(false)" class="text-xs font-semibold px-4 py-2 bg-slate-900 text-white rounded-xl">Close Inspector</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 bg-slate-900 text-white text-xs font-medium px-4 py-3 rounded-xl shadow-xl border border-slate-700 flex items-center gap-2 hidden">
+    <span id="toast-icon">✓</span>
+    <span id="toast-message">Reset to empty state</span>
+  </div>
+
+  <!-- PERSISTENT FOOTER / ACADEMIC CREDIT -->
+  <footer class="mt-auto bg-white border-t border-slate-200 py-3 px-4 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between max-w-5xl mx-auto w-full gap-2">
+    <div class="flex items-center gap-2">
+      <span class="font-bold text-slate-700">URLGuard</span>
+      <span>•</span>
+      <span>AI for Cyber Security Project</span>
+    </div>
+    <div class="text-[11px] text-slate-400">
+      PhiUSIIL Phishing URL Dataset (UCI Machine Learning Repository)
+    </div>
+  </footer>
+
+  <!-- SCRIPT LOGIC FOR SMOOTH INTERACTIVITY & STATE PRESETS -->
+  <script>
+    let currentActivePage = 'analyzer';
+
+    // Page switcher
+    function switchPage(pageId) {
+      currentActivePage = pageId;
+      const pages = ['analyzer', 'history', 'performance', 'about'];
+      pages.forEach(p => {
+        const el = document.getElementById('page-' + p);
+        const nav = document.getElementById('nav-' + p);
+        if (p === pageId) {
+          el.classList.remove('hidden');
+          nav.classList.add('tab-active');
+          nav.classList.remove('text-slate-600', 'hover:bg-slate-100');
+        } else {
+          el.classList.add('hidden');
+          nav.classList.remove('tab-active');
+          nav.classList.add('text-slate-600', 'hover:bg-slate-100');
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Toggle quick state menu
+    function togglePresetMenu() {
+      const bar = document.getElementById('state-preset-bar');
+      bar.classList.toggle('hidden');
+    }
+
+    // Reset all analysis result views
+    function hideAllAnalysisStates() {
+      document.getElementById('state-empty').classList.add('hidden');
+      document.getElementById('state-loading').classList.add('hidden');
+      document.getElementById('result-legitimate').classList.add('hidden');
+      document.getElementById('result-phishing').classList.add('hidden');
+      document.getElementById('state-error-invalid').classList.add('hidden');
+      document.getElementById('state-error-backend').classList.add('hidden');
+    }
+
+    // Interactive state controller
+    function setAnalysisState(state) {
+      switchPage('analyzer');
+      hideAllAnalysisStates();
+      const input = document.getElementById('url-input');
+      const clearBtn = document.getElementById('clear-btn');
+
+      if (state === 'empty') {
+        input.value = '';
+        clearBtn.classList.add('hidden');
+        document.getElementById('state-empty').classList.remove('hidden');
+        showToast('Reset to empty state');
+      } else if (state === 'prefill') {
+        input.value = 'https://portal-account-service.com/login';
+        clearBtn.classList.remove('hidden');
+        document.getElementById('state-empty').classList.remove('hidden');
+        showToast('Prefilled URL without analysis');
+      } else if (state === 'loading') {
+        input.value = 'http://secure-login-verification-account.xyz/verify';
+        clearBtn.classList.remove('hidden');
+        document.getElementById('loading-target-url').innerText = input.value;
+        document.getElementById('state-loading').classList.remove('hidden');
+        showToast('Simulating real-time ML feature extraction...');
+      } else if (state === 'legitimate') {
+        input.value = 'https://www.example.com';
+        clearBtn.classList.remove('hidden');
+        document.getElementById('result-legitimate').classList.remove('hidden');
+        showToast('Displaying Safe URL ML Result (98.4%)');
+      } else if (state === 'phishing') {
+        input.value = 'http://secure-login-verification-account.xyz/verify';
+        clearBtn.classList.remove('hidden');
+        document.getElementById('result-phishing').classList.remove('hidden');
+        showToast('Displaying Phishing Threat Result (96.8%)');
+      } else if (state === 'error-invalid') {
+        input.value = 'htt://invalid_url_pattern';
+        clearBtn.classList.remove('hidden');
+        document.getElementById('state-error-invalid').classList.remove('hidden');
+        showToast('Triggered Invalid URL state');
+      } else if (state === 'error-backend') {
+        input.value = 'https://test-target.com';
+        clearBtn.classList.remove('hidden');
+        document.getElementById('state-error-backend').classList.remove('hidden');
+        showToast('Triggered Backend Offline simulation');
+      }
+    }
+
+    function setSampleUrl(type) {
+      const input = document.getElementById('url-input');
+      const clearBtn = document.getElementById('clear-btn');
+      if (type === 'legitimate') {
+        input.value = 'https://www.example.com';
+      } else {
+        input.value = 'http://secure-login-verification-account.xyz/verify';
+      }
+      clearBtn.classList.remove('hidden');
+    }
+
+    function clearInput() {
+      document.getElementById('url-input').value = '';
+      document.getElementById('clear-btn').classList.add('hidden');
+      hideAllAnalysisStates();
+      document.getElementById('state-empty').classList.remove('hidden');
+    }
+
+    // Trigger analysis with animation transition
+    function triggerAnalyze() {
+      const val = document.getElementById('url-input').value.trim();
+      hideAllAnalysisStates();
+
+      if (!val) {
+        document.getElementById('state-empty').classList.remove('hidden');
+        showToast('Please enter a URL first');
+        return;
+      }
+
+      if (!val.includes('.') || val.length < 4) {
+        document.getElementById('state-error-invalid').classList.remove('hidden');
+        return;
+      }
+
+      // Show loading step
+      document.getElementById('loading-target-url').innerText = val;
+      document.getElementById('state-loading').classList.remove('hidden');
+
+      setTimeout(() => {
+        hideAllAnalysisStates();
+        // If string contains keywords or starts with http://, trigger phishing
+        if (val.includes('xyz') || val.includes('verify') || val.includes('login') || val.startsWith('http://')) {
+          document.getElementById('result-phishing').classList.remove('hidden');
+          showToast('Phishing markers detected!');
+        } else {
+          document.getElementById('result-legitimate').classList.remove('hidden');
+          showToast('URL verified legitimate.');
+        }
+      }, 900);
+    }
+
+    // History Table Filter Logic
+    function filterHistoryTable() {
+      const query = document.getElementById('history-search').value.toLowerCase();
+      const predFilter = document.getElementById('history-prediction-filter').value;
+      const riskFilter = document.getElementById('history-risk-filter').value;
+
+      const rows = document.querySelectorAll('#history-tbody tr');
+      rows.forEach(r => {
+        const text = r.innerText.toLowerCase();
+        const pred = r.getAttribute('data-pred');
+        const risk = r.getAttribute('data-risk');
+
+        const matchQuery = text.includes(query);
+        const matchPred = predFilter === 'ALL' || pred === predFilter;
+        const matchRisk = riskFilter === 'ALL' || risk === riskFilter;
+
+        if (matchQuery && matchPred && matchRisk) {
+          r.style.display = '';
+        } else {
+          r.style.display = 'none';
+        }
+      });
+    }
+
+    function toggleHistoryEmptyState() {
+      const table = document.getElementById('history-table-container');
+      const empty = document.getElementById('history-empty-view');
+      const btn = document.getElementById('history-toggle-empty-btn');
+      if (table.classList.contains('hidden')) {
+        table.classList.remove('hidden');
+        empty.classList.add('hidden');
+        btn.innerText = 'Show Empty State';
+      } else {
+        table.classList.add('hidden');
+        empty.classList.remove('hidden');
+        btn.innerText = 'Show Data Table';
+      }
+    }
+
+    function clearHistoryTable() {
+      document.getElementById('history-tbody').innerHTML = '';
+      toggleHistoryEmptyState();
+      showToast('History log cleared.');
+    }
+
+    function viewHistoryDetail(url, pred, conf, risk) {
+      switchPage('analyzer');
+      document.getElementById('url-input').value = url;
+      if (pred === 'PHISHING') {
+        setAnalysisState('phishing');
+      } else {
+        setAnalysisState('legitimate');
+      }
+    }
+
+    // Modal Helpers
+    function toggleCsvModal(show) {
+      document.getElementById('modal-csv').classList.toggle('hidden', !show);
+      document.getElementById('csv-error-demo').classList.add('hidden');
+    }
+
+    function simulateCsvError() {
+      document.getElementById('csv-error-demo').classList.remove('hidden');
+    }
+
+    function processCsvDemo() {
+      toggleCsvModal(false);
+      showToast('Batch processing 42 URLs. Added to History.');
+      switchPage('history');
+    }
+
+    function toggleAllFeaturesModal(show) {
+      document.getElementById('modal-all-features').classList.toggle('hidden', !show);
+    }
+
+    // Toast helper
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-message').innerText = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3000);
+    }
+
+    // Monitor input changes
+    document.getElementById('url-input').addEventListener('input', function(e) {
+      const clearBtn = document.getElementById('clear-btn');
+      if (e.target.value.length > 0) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+    });
+
+    document.getElementById('url-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        triggerAnalyze();
+      }
+    });
+  </script>
+
+
+
+
+</body></html>
