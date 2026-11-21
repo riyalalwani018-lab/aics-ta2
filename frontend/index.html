@@ -1,7 +1,7 @@
-﻿<!DOCTYPE html><html class="scroll-smooth" lang="en"><svg class="inline-defs-container" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"></svg><head>
+<!DOCTYPE html><html class="scroll-smooth" lang="en"><svg class="inline-defs-container" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"></svg><head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>ImageGuard — AI-Powered Image Authenticity Detection</title>
+<title>ImageGuard — Machine Learning-Based Image Authenticity Detection</title>
 <!-- Tailwind CSS v3 with Plugins -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script>
@@ -278,7 +278,7 @@
 </style>
 <style id="hero-svg-upload">
 .hero-upload{position:absolute;left:21.5%;top:28.0%;width:47.0%;height:53.2%;box-sizing:border-box;background:#fffaf2;border:3px solid #ff2a85;border-radius:12px;overflow:hidden;color:#22262a;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;box-shadow:0 0 0 1px rgba(255,42,133,.12);pointer-events:auto}
-.hero-windowbar{height:20%;display:flex;align-items:center;gap:9px;padding:0 16px;border-bottom:2px solid #ff2a85;background:#fffdf9}.hero-dot{width:11px;height:11px;border-radius:50%;display:inline-block;flex:0 0 auto}.hero-dot-pink{background:#ff1685}.hero-dot-cream{background:#9bf40b}.hero-dot-purple{background:#7c3aed}.hero-window-title{font-size:13px;font-weight:900;color:#ff1685;letter-spacing:.02em;margin-left:4px}.hero-window-label{margin-left:auto;font-size:10px;font-weight:800;color:#55515a;letter-spacing:.04em}
+.hero-windowbar{height:20%;display:flex;align-items:center;gap:9px;padding:0 16px;border-bottom:2px solid #ff2a85;background:#fffdf9}.hero-dot{width:11px;height:11px;border-radius:50%;display:inline-block;flex:0 0 auto}.hero-dot-pink{background:#ff1685}.hero-dot-cream{background:#47f47b}.hero-dot-purple{background:#7c3aed}.hero-window-title{font-size:13px;font-weight:900;color:#ff1685;letter-spacing:.02em;margin-left:4px}.hero-window-label{margin-left:auto;font-size:10px;font-weight:800;color:#55515a;letter-spacing:.04em}
 .hero-upload-body{padding:13px 16px 12px;position:relative;height:80%;box-sizing:border-box}.hero-upload-heading{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:900;color:#4d4b50;margin-bottom:8px}.hero-upload-heading span:last-child{font-size:10px;color:#5f5a60}.hero-file-box{height:39px;border:1.5px solid #8e8e8e;border-radius:7px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 9px 0 12px;cursor:pointer;box-sizing:border-box}#heroFileName{font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:72%;color:#151824}.hero-browse{font-size:10px;font-weight:900;color:#ff1685;letter-spacing:.03em}.hero-analyze{position:absolute;left:16px;bottom:15px;width:150px;height:34px;border:0;cursor:pointer;font-size:11px;letter-spacing:.04em}.hero-analyze:disabled{opacity:.55;cursor:not-allowed}.hero-status{position:absolute;right:16px;bottom:23px;display:flex;align-items:center;gap:7px;font-size:10px;font-weight:900;color:#55515a}.hero-status-dot{width:10px;height:10px;border-radius:50%;background:#08aee8;display:inline-block}
 @media(max-width:900px){.hero-window-title{font-size:11px}.hero-window-label{font-size:8px}.hero-upload-heading{font-size:10px}.hero-file-box{height:34px}.hero-analyze{width:120px;height:30px;font-size:9px}.hero-status{font-size:8px}}@media(max-width:640px){.hero-upload{left:21.5%;top:28.2%;width:47%;height:53%}.hero-windowbar{padding:0 10px;gap:6px}.hero-window-title{font-size:9px}.hero-window-label{display:none}.hero-upload-body{padding:8px 10px}.hero-upload-heading{font-size:8px}.hero-upload-heading span:last-child{display:none}.hero-file-box{height:28px;padding:0 7px}.hero-browse{font-size:8px}.hero-analyze{left:10px;bottom:9px;width:90px;height:25px;font-size:8px}.hero-status{right:10px;bottom:16px;font-size:7px}.hero-status-dot{width:7px;height:7px}}
 </style>
@@ -298,9 +298,8 @@
 <div class="flex flex-col">
 <div class="flex items-center gap-1.5">
 <span class="text-lg font-black tracking-tight text-[#1f242c] font-mono">ImageGuard</span>
-<span class="text-[10px] font-mono px-2 py-0.2 rounded bg-rose-50 text-rose-800 border border-rose-200 uppercase font-bold">AI Forensics Lab</span>
 </div>
-<span class="text-[10px] text-[#6e675f] font-mono hidden sm:inline">AI-Powered Image Authenticity Detection</span>
+<span class="text-[10px] text-[#6e675f] font-mono hidden sm:inline">Machine Learning-Based Image Authenticity Detection</span>
 </div>
 </a>
 </div>
@@ -325,7 +324,7 @@
 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-500 opacity-75"></span>
 <span class="relative inline-flex rounded-full h-2 w-2 bg-teal-600"></span>
 </span>
-<span>CIFAKE Engine: <span class="text-teal-700 font-bold">140,000 Images Trained</span></span>
+<span>CIFAKE Dataset: <span class="text-teal-700 font-bold">120,000 Images</span></span>
 </div>
 </div>
 </header>
@@ -345,7 +344,7 @@
         <div class="hero-windowbar"><span class="hero-dot hero-dot-pink"></span><span class="hero-dot hero-dot-cream"></span><span class="hero-dot hero-dot-purple"></span><span class="hero-window-title">IMAGEGUARD</span><span class="hero-window-label">AUTHENTICITY SCAN</span></div>
         <div class="hero-upload-body">
           <div class="hero-upload-heading"><span>UPLOAD IMAGE</span><span>JPG · PNG · WEBP</span></div>
-          <label for="imageInput" class="hero-file-box"><span id="heroFileName">Choose an image to analyze</span><span class="hero-browse">BROWSE</span></label>
+          <label for="imageInput" class="hero-file-box"><span id="heroFileName">Choose an image to analyze(32x32)</span><span class="hero-browse">BROWSE</span></label>
           <button type="button" id="heroAnalyzeImage" class="hero-analyze">ANALYZE <span>→</span></button>
           <div class="hero-status"><span class="hero-status-dot"></span><span id="heroStatusText">READY TO ANALYZE</span></div>
         </div>
@@ -382,35 +381,20 @@
 <!-- MAIN RESULTS GRID: Mascot Stage + Deep Heuristic Cards -->
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
 <!-- ================= COMPANION MASCOT FIGURINE (5 COLS) ================= -->
-<div class="lg:col-span-5 rounded-3xl bg-white border border-[#e6dfd3] p-6 flex flex-col justify-between shadow-xs relative overflow-hidden">
-<!-- Card Header & Interactive State Switcher -->
-<div>
-<div class="flex items-center justify-between mb-3">
-<span class="text-xs font-mono text-[#1f242c] font-semibold uppercase tracking-wider flex items-center gap-1.5">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="bot" aria-hidden="true" class="lucide lucide-bot w-4 h-4 text-teal-700"><path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>
-                Companion Authenticity Figurine
-              </span>
-<span class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#faf7f2] text-[#5c5650] border border-[#ded5c5] font-bold" id="mascotMoodBadge">State: Awaiting</span>
+<div class="lg:col-span-5 rounded-3xl bg-white border border-[#e6dfd3] p-6 flex flex-col shadow-xs relative overflow-hidden">
+<div class="flex items-center">
+    <span class="text-xs font-mono text-[#1f242c] font-semibold uppercase tracking-wider">
+        Mascot
+    </span>
 </div>
-<!-- Manual Interactive Switcher for the 3 Expressive Octopus States -->
-<div class="flex items-center gap-1 p-1 bg-[#f7f4ee] rounded-xl border border-[#ded5c5] text-[11px] font-mono">
-<button class="companion-btn flex-1 py-1 rounded-lg hover:text-[#1f242c] transition-all flex items-center justify-center gap-1 font-medium bg-white text-[#1f242c] font-bold shadow-xs border border-[#ded5c5]" id="btn-c-safe" onclick="setCompanionState('safe')">
-<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
-<span>1. Real Image</span>
-</button>
-<button class="companion-btn flex-1 py-1 rounded-lg hover:text-[#1f242c] transition-all flex items-center justify-center gap-1 font-medium text-[#5c5650]" id="btn-c-suspicious" onclick="setCompanionState('suspicious')">
-<span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
-<span>2. Uncertain</span>
-</button>
-<button class="companion-btn flex-1 py-1 rounded-lg transition-all flex items-center justify-center gap-1 text-[#5c5650]" id="btn-c-phishing" onclick="setCompanionState('phishing')">
-<span class="w-1.5 h-1.5 rounded-full bg-rose-600 animate-ping"></span>
-<span>3. AI-Generated</span>
-</button>
+<div class="flex-1 flex flex-col items-center justify-center relative min-h-[300px]">
+<!-- Mascot Status -->
+<div class="absolute top-[18%] left-0 right-0 text-center z-10">
+    <div class="text-xs font-mono font-bold text-[#1f242c] uppercase tracking-wider" id="companionTitle">
+        Awaiting Image Analysis
+    </div>
 </div>
-</div>
-<!-- DEDICATED REALISTIC SVG OCTOPUS MASCOT STAGE -->
-<div class="my-4 py-4 flex flex-col items-center justify-center relative min-h-[250px] bg-[#fdfbf7] rounded-2xl border border-[#ede7dc]">
-<!-- Dynamic Glow Backdrop -->
+  <!-- Dynamic Glow Backdrop -->
 <div class="absolute w-44 h-44 rounded-full bg-emerald-400/25 blur-3xl pointer-events-none transition-all duration-700" id="companionGlow"></div>
 <!-- UNMISTAKABLE DETAILED SVG OCTOPUS FIGURINE -->
 <svg class="w-56 h-52 overflow-visible select-none" fill="none" id="companionMascotSvg" viewBox="0 0 240 220">
@@ -485,16 +469,11 @@
       </g>
 </g>
 </svg>
-<!-- Mascot Status Feedback -->
-<div class="mt-2 text-center">
-<div class="text-xs font-mono font-bold text-[#1f242c] uppercase tracking-wider" id="companionTitle">Awaiting Image Analysis</div>
-<div class="text-[11px] text-[#5c5650] font-sans mt-0.5 max-w-xs mx-auto" id="companionDesc">Upload an image to begin authenticity analysis.</div>
-</div>
-</div>
 <!-- Bottom Meta Footer -->
 <div class="pt-3 border-t border-[#ede7dc] text-[11px] font-mono text-[#8b8377] flex items-center justify-between">
 <span>Model: EfficientNetB0</span>
 <span class="text-rose-700 font-bold" id="mascotLatency">Awaiting analysis</span>
+</div>
 </div>
 </div>
 <!-- ================= TELEMETRIC HEURISTIC CARDS (7 COLS) ================= -->
@@ -538,11 +517,12 @@
 </div>
 <p class="text-[11px] text-[#5c5650] leading-snug">The highlighted regions represent areas that contributed most strongly to the model's classification. This visualization is produced by the Grad-CAM explainability module on the backend.</p>
 </div>
+</div>
 <!-- Image Characteristics Data Grid -->
+<div class="lg:col-span-12">
 <div class="p-4 rounded-2xl bg-white border border-[#e6dfd3] shadow-xs">
 <div class="text-xs font-mono font-bold uppercase tracking-wider text-[#1f242c] mb-3 flex items-center justify-between">
 <span>Image Characteristics</span>
-<span class="text-[10px] text-teal-700 font-semibold">Image Metadata Audit</span>
 </div>
 <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs font-mono">
 <div class="p-2.5 rounded-xl bg-[#faf7f2] border border-[#ded5c5]">
@@ -571,11 +551,6 @@
 <div class="text-[9px] text-[#5c5650]">RGB / RGBA / Gray</div>
 </div>
 <div class="p-2.5 rounded-xl bg-[#faf7f2] border border-[#ded5c5]">
-<div class="text-[10px] text-[#8b8377] uppercase font-bold">Metadata</div>
-<div class="text-sm font-bold text-amber-700 mt-0.5" id="grid-symbols">—</div>
-<div class="text-[9px] text-[#5c5650]">EXIF / None</div>
-</div>
-<div class="p-2.5 rounded-xl bg-[#faf7f2] border border-[#ded5c5]">
 <div class="text-[10px] text-[#8b8377] uppercase font-bold">File Format</div>
 <div class="text-sm font-bold text-rose-700 mt-0.5" id="grid-similarity">—</div>
 <div class="text-[9px] text-[#5c5650]">Image Format</div>
@@ -597,15 +572,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="sliders" aria-hidden="true" class="lucide lucide-sliders w-4 h-4 text-teal-700"><path d="M10 8h4"></path><path d="M12 21v-9"></path><path d="M12 8V3"></path><path d="M17 16h4"></path><path d="M19 12V3"></path><path d="M19 21v-5"></path><path d="M3 14h4"></path><path d="M5 10V3"></path><path d="M5 21v-7"></path></svg>
 <span>Analysis Details</span>
 </div>
-<p class="text-xs text-[#5c5650] font-mono mt-0.5">Model prediction, confidence, and processing metadata</p>
-</div>
-<div class="flex items-center gap-2">
-<button class="text-[11px] font-mono px-3 py-1 rounded-lg bg-white hover:bg-stone-50 text-[#5c5650] border border-[#ded5c5] transition-colors shadow-2xs font-medium" onclick="toggleErrorState('invalid')" type="button">
-              Simulate: No Image
-            </button>
-<button class="text-[11px] font-mono px-3 py-1 rounded-lg bg-white hover:bg-stone-50 text-[#5c5650] border border-[#ded5c5] transition-colors shadow-2xs font-medium" onclick="toggleErrorState('down')" type="button">
-              Simulate: Server Offline
-            </button>
+<p class="text-xs text-[#5c5650] font-mono mt-0.5">Model prediction and confidence</p>
 </div>
 </div>
 <!-- Simulated Error Toast -->
@@ -622,7 +589,6 @@
 <tr class="border-b border-[#e6dfd3] text-[#5c5650] uppercase bg-[#fdfbf8]">
 <th class="py-3 px-6">Analysis Detail</th>
 <th class="py-3 px-6">Observed Value</th>
-<th class="py-3 px-6">Reference</th>
 <th class="py-3 px-6">Significance</th>
 <th class="py-3 px-6 text-right">Status</th>
 </tr>
@@ -635,7 +601,6 @@
 </td>
 <td class="py-3.5 px-6 text-teal-900 font-semibold" id="tv-url-len">—</td>
 <td class="py-3.5 px-6 text-[#6e675f]">REAL or AI-GENERATED</td>
-<td class="py-3.5 px-6">Key Metric</td>
 <td class="py-3.5 px-6 text-right"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200" id="badge-url-len">NORMAL</span></td>
 </tr>
 <tr>
@@ -645,7 +610,6 @@
 </td>
 <td class="py-3.5 px-6 text-teal-900 font-semibold" id="tv-subdomains">—</td>
 <td class="py-3.5 px-6 text-[#6e675f]">0–100%</td>
-<td class="py-3.5 px-6">Key Metric</td>
 <td class="py-3.5 px-6 text-right"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200" id="badge-subdomains">NORMAL</span></td>
 </tr>
 <tr>
@@ -655,7 +619,6 @@
 </td>
 <td class="py-3.5 px-6 text-teal-900 font-semibold" id="tv-brand">—</td>
 <td class="py-3.5 px-6 text-[#6e675f]">EfficientNetB0</td>
-<td class="py-3.5 px-6">Key Metric</td>
 <td class="py-3.5 px-6 text-right"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200" id="badge-brand">NORMAL</span></td>
 </tr>
 <tr>
@@ -665,7 +628,6 @@
 </td>
 <td class="py-3.5 px-6 text-teal-900 font-semibold" id="tv-hyphens">—</td>
 <td class="py-3.5 px-6 text-[#6e675f]">Binary Authenticity</td>
-<td class="py-3.5 px-6">Key Metric</td>
 <td class="py-3.5 px-6 text-right"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200" id="badge-hyphens">NORMAL</span></td>
 </tr>
 <tr>
@@ -675,7 +637,6 @@
 </td>
 <td class="py-3.5 px-6 text-teal-900 font-semibold" id="tv-tld">—</td>
 <td class="py-3.5 px-6 text-[#6e675f]">seconds</td>
-<td class="py-3.5 px-6">Key Metric</td>
 <td class="py-3.5 px-6 text-right"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200" id="badge-tld">NORMAL</span></td>
 </tr>
 </tbody>
@@ -690,7 +651,7 @@
 <div class="border-b border-[#e6dfd3] pb-5">
 <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-teal-800 font-bold">
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="database" aria-hidden="true" class="lucide lucide-database w-4 h-4"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5V19A9 3 0 0 0 21 19V5"></path><path d="M3 12A9 3 0 0 0 21 12"></path></svg>
-<span>Evaluation Benchmarks • CIFAKE Dataset • 140,000 Images</span>
+<span>Evaluation Benchmarks • CIFAKE Dataset • 120,000 Images</span>
 </div>
 <h2 class="text-3xl font-extrabold text-[#1f242c] tracking-tight mt-1">
         Image Classifier Benchmarks &amp; Model Performance
@@ -699,32 +660,27 @@
         Comparative evaluation of deep-learning classifiers trained on the CIFAKE dataset of real and AI-generated synthetic images. EfficientNetB0 is the planned deployment architecture for binary image authenticity classification.
       </p>
 </div>
-<!-- Placeholder Disclaimer -->
-<div class="flex items-start gap-2 p-3.5 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-mono">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="info" aria-hidden="true" class="lucide lucide-info w-4 h-4 text-amber-700 shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
-<span>The metrics below are <strong>placeholders</strong> pending model training and evaluation. Final values will be populated from the trained image classifier's actual results.</span>
-</div>
 <!-- 4 Stat Badges -->
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
 <div class="p-5 rounded-2xl bg-white border border-[#e6dfd3] shadow-xs">
 <div class="text-xs font-mono text-[#8b8377] font-semibold">DATASET SAMPLE</div>
-<div class="text-2xl sm:text-3xl font-black font-mono text-[#1f242c] mt-1">140,000</div>
-<div class="text-[11px] text-teal-700 font-mono mt-0.5">CIFAKE Real / AI-Gen</div>
+<div id="performance-dataset-sample" class="text-2xl sm:text-3xl font-black font-mono text-[#1f242c] mt-1">120,000</div>
+<div id="performance-dataset-label" class="text-[11px] text-teal-700 font-mono mt-0.5">120,000 total images</div>
 </div>
 <div class="p-5 rounded-2xl bg-white border border-[#e6dfd3] shadow-xs">
 <div class="text-xs font-mono text-[#8b8377] font-semibold">BEST MODEL ACCURACY</div>
-<div class="text-2xl sm:text-3xl font-black font-mono text-emerald-700 mt-1">—</div>
-<div class="text-[11px] text-emerald-800 font-mono mt-0.5">Pending model training</div>
+<div id="performance-accuracy" class="text-2xl sm:text-3xl font-black font-mono text-emerald-700 mt-1">—</div>
+<div id="performance-accuracy-label" class="text-[11px] text-emerald-800 font-mono mt-0.5">Loading...</div>
 </div>
 <div class="p-5 rounded-2xl bg-white border border-[#e6dfd3] shadow-xs">
 <div class="text-xs font-mono text-[#8b8377] font-semibold">ROC-AUC SCORE</div>
-<div class="text-2xl sm:text-3xl font-black font-mono text-rose-700 mt-1">—</div>
-<div class="text-[11px] text-rose-800 font-mono mt-0.5">Pending model evaluation</div>
+<div id="performance-roc-auc" class="text-2xl sm:text-3xl font-black font-mono text-rose-700 mt-1">—</div>
+<div id="performance-roc-auc-label" class="text-[11px] text-rose-800 font-mono mt-0.5">Loading...</div>
 </div>
 <div class="p-5 rounded-2xl bg-white border border-[#e6dfd3] shadow-xs">
 <div class="text-xs font-mono text-[#8b8377] font-semibold">MEAN INFERENCE TIME</div>
-<div class="text-2xl sm:text-3xl font-black font-mono text-teal-800 mt-1">—</div>
-<div class="text-[11px] text-[#5c5650] font-mono mt-0.5">Pending benchmark</div>
+<div id="performance-inference-time" class="text-2xl sm:text-3xl font-black font-mono text-teal-800 mt-1">—</div>
+<div id="performance-inference-time-label" class="text-[11px] text-[#5c5650] font-mono mt-0.5">Loading...</div>
 </div>
 </div>
 <!-- Middle Row: Confusion Matrix + Feature Importance -->
@@ -742,23 +698,23 @@
 <div class="grid grid-cols-2 gap-2 text-center font-mono">
 <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200 flex flex-col justify-center">
 <span class="text-[10px] text-emerald-800 uppercase font-semibold">True Positive (Real)</span>
-<span class="text-xl font-bold text-emerald-950 mt-1">—</span>
-<span class="text-[10px] text-emerald-700 mt-0.5">Pending</span>
+<span id="performance-tp" class="text-xl font-bold text-emerald-950 mt-1">—</span>
+<span id="performance-tp-label" class="text-[10px] text-emerald-700 mt-0.5">Loading...</span>
 </div>
 <div class="p-4 rounded-xl bg-[#faf7f2] border border-[#ded5c5] flex flex-col justify-center">
 <span class="text-[10px] text-[#6e675f] uppercase font-semibold">False Negative (AI as Real)</span>
-<span class="text-xl font-bold text-rose-700 mt-1">—</span>
-<span class="text-[10px] text-[#8b8377] mt-0.5">Pending</span>
+<span id="performance-fn" class="text-xl font-bold text-rose-700 mt-1">—</span>
+<span id="performance-fn-label" class="text-[10px] text-[#8b8377] mt-0.5">Loading...</span>
 </div>
 <div class="p-4 rounded-xl bg-[#faf7f2] border border-[#ded5c5] flex flex-col justify-center">
 <span class="text-[10px] text-[#6e675f] uppercase font-semibold">False Positive (Real as AI)</span>
-<span class="text-xl font-bold text-amber-700 mt-1">—</span>
-<span class="text-[10px] text-[#8b8377] mt-0.5">Pending</span>
+<span id="performance-fp" class="text-xl font-bold text-amber-700 mt-1">—</span>
+<span id="performance-fp-label" class="text-[10px] text-[#8b8377] mt-0.5">Loading...</span>
 </div>
 <div class="p-4 rounded-xl bg-rose-50 border border-rose-200 flex flex-col justify-center">
 <span class="text-[10px] text-rose-800 uppercase font-semibold">True Negative (AI-Generated)</span>
-<span class="text-xl font-bold text-rose-950 mt-1">—</span>
-<span class="text-[10px] text-rose-700 mt-0.5">Pending</span>
+<span id="performance-tn" class="text-xl font-bold text-rose-950 mt-1">—</span>
+<span id="performance-tn-label" class="text-[10px] text-rose-700 mt-0.5">Loading...</span>
 </div>
 </div>
 <p class="text-[11px] text-[#5c5650] font-sans text-center mt-2">
@@ -773,16 +729,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="activity" aria-hidden="true" class="lucide lucide-activity w-4 h-4 text-rose-600"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"></path></svg>
             ROC Curve (Receiver Operating Characteristic)
           </span>
-<span class="text-[11px] font-mono text-[#8b8377]">AUC: pending</span>
+<span id="performance-roc-auc-chart" class="text-[11px] font-mono text-[#8b8377]">AUC: pending</span>
 </div>
 <div class="relative">
-<svg viewBox="0 0 320 240" class="w-full h-auto" role="img" aria-label="ROC curve placeholder">
+<svg id="performance-roc-chart" viewBox="0 0 320 240" class="w-full h-auto" role="img" aria-label="ROC curve">
 <rect x="48" y="24" width="252" height="176" fill="#fdfbf7" stroke="#ede7dc" stroke-width="1" rx="6"></rect>
 <line x1="48" y1="200" x2="300" y2="200" stroke="#c9bfa9" stroke-width="1.5"></line>
 <line x1="48" y1="24" x2="48" y2="200" stroke="#c9bfa9" stroke-width="1.5"></line>
 <line x1="174" y1="24" x2="174" y2="200" stroke="#ede7dc" stroke-width="1" stroke-dasharray="2 3"></line>
 <line x1="48" y1="112" x2="300" y2="112" stroke="#ede7dc" stroke-width="1" stroke-dasharray="2 3"></line>
-<line x1="48" y1="200" x2="300" y2="24" stroke="#b45309" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.55"></line>
+<line id="roc-random-line" x1="48" y1="200" x2="300" y2="24" stroke="#b45309" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.55"></line>
+<path
+  id="performance-roc-path"
+  d=""
+  fill="none"
+  stroke="#0f766e"
+  stroke-width="2.5"
+  stroke-linecap="round"
+  stroke-linejoin="round">
+</path>
 <g font-family="ui-monospace, monospace" font-size="9" fill="#8b8377">
 <text x="44" y="204" text-anchor="end">0</text>
 <text x="44" y="116" text-anchor="end">0.5</text>
@@ -793,11 +758,9 @@
 </g>
 <text x="174" y="234" text-anchor="middle" font-family="ui-monospace, monospace" font-size="10" fill="#5c5650">False Positive Rate</text>
 <text x="16" y="112" text-anchor="middle" font-family="ui-monospace, monospace" font-size="10" fill="#5c5650" transform="rotate(-90 16 112)">True Positive Rate</text>
-<text x="174" y="108" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11" fill="#b45309" font-weight="700">Pending model evaluation</text>
-<text x="174" y="124" text-anchor="middle" font-family="ui-monospace, monospace" font-size="9" fill="#8b8377">dashed line = random classifier (AUC = 0.5)</text>
 </svg>
 </div>
-<p class="text-[11px] text-[#5c5650] font-sans">The ROC curve plots the trade-off between the true-positive and false-positive rates across decision thresholds. The curve will be drawn from the trained model's evaluation output.</p>
+<p class="text-[11px] text-[#5c5650] font-sans">The ROC curve plots the trade-off between the true-positive and false-positive rates across decision thresholds. Generated from the trained model's 20,000-image CIFAKE test evaluation.</p>
 </div>
 </div>
 <!-- Training & Validation Curves -->
@@ -813,104 +776,423 @@
 </div>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-<div class="rounded-2xl border border-[#ede7dc] bg-[#fdfbf7] p-3">
-<div class="text-[10px] font-mono uppercase font-bold text-[#8b8377] mb-1">Accuracy (per epoch)</div>
-<svg viewBox="0 0 280 170" class="w-full h-auto" role="img" aria-label="Training and validation accuracy placeholder">
-<rect x="36" y="16" width="232" height="132" fill="#ffffff" stroke="#ede7dc" rx="6"></rect>
-<line x1="36" y1="148" x2="268" y2="148" stroke="#c9bfa9" stroke-width="1.5"></line>
-<line x1="36" y1="16" x2="36" y2="148" stroke="#c9bfa9" stroke-width="1.5"></line>
-<line x1="152" y1="16" x2="152" y2="148" stroke="#ede7dc" stroke-width="1" stroke-dasharray="2 3"></line>
-<line x1="36" y1="82" x2="268" y2="82" stroke="#ede7dc" stroke-width="1" stroke-dasharray="2 3"></line>
-<g font-family="ui-monospace, monospace" font-size="8" fill="#8b8377">
-<text x="32" y="152" text-anchor="end">0</text>
-<text x="32" y="85" text-anchor="end">0.5</text>
-<text x="32" y="20" text-anchor="end">1</text>
-<text x="36" y="162" text-anchor="middle">0</text>
-<text x="152" y="162" text-anchor="middle">epochs</text>
-<text x="268" y="162" text-anchor="middle">N</text>
-</g>
-<text x="152" y="85" text-anchor="middle" font-family="ui-monospace, monospace" font-size="10" fill="#5c5650" font-weight="700">Pending model training</text>
-</svg>
+
+  <!-- Accuracy Chart -->
+  <div class="rounded-2xl border border-[#ede7dc] bg-[#fdfbf7] p-3">
+    <div class="text-[10px] font-mono uppercase font-bold text-[#8b8377] mb-1">
+      Accuracy (per epoch)
+    </div>
+
+    <svg
+      id="training-accuracy-chart"
+      viewBox="0 0 280 170"
+      class="w-full h-auto"
+      role="img"
+      aria-label="Training and validation accuracy across epochs"
+    >
+      <rect
+        x="36"
+        y="16"
+        width="232"
+        height="132"
+        fill="#ffffff"
+        stroke="#ede7dc"
+        rx="6"
+      ></rect>
+
+      <line
+        x1="36" y1="148"
+        x2="268" y2="148"
+        stroke="#c9bfa9"
+        stroke-width="1.5"
+      ></line>
+
+      <line
+        x1="36" y1="16"
+        x2="36" y2="148"
+        stroke="#c9bfa9"
+        stroke-width="1.5"
+      ></line>
+
+      <line
+        x1="152" y1="16"
+        x2="152" y2="148"
+        stroke="#ede7dc"
+        stroke-width="1"
+        stroke-dasharray="2 3"
+      ></line>
+
+      <line
+        x1="36" y1="82"
+        x2="268" y2="82"
+        stroke="#ede7dc"
+        stroke-width="1"
+        stroke-dasharray="2 3"
+      ></line>
+
+      <g
+        font-family="ui-monospace, monospace"
+        font-size="8"
+        fill="#8b8377"
+      >
+        <text x="32" y="152" text-anchor="end">0</text>
+        <text x="32" y="85" text-anchor="end">0.5</text>
+        <text x="32" y="20" text-anchor="end">1</text>
+
+        <text x="36" y="162" text-anchor="middle">1</text>
+        <text x="152" y="162" text-anchor="middle">8</text>
+        <text x="268" y="162" text-anchor="middle">16</text>
+      </g>
+
+      <!-- Stage 2 boundary -->
+      <line
+        x1="152"
+        y1="16"
+        x2="152"
+        y2="148"
+        stroke="#b45309"
+        stroke-width="1"
+        stroke-dasharray="4 4"
+        opacity="0.45"
+      ></line>
+
+      <text
+  x="168"
+  y="34"
+  text-anchor="middle"
+  font-family="ui-monospace, monospace"
+  font-size="7"
+  fill="#8b8377"
+>
+  Stage 2
+</text>
+
+      <!-- Training accuracy -->
+      <path
+        id="training-accuracy-path"
+        d=""
+        fill="none"
+        stroke="#0f766e"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></path>
+
+      <!-- Validation accuracy -->
+      <path
+        id="validation-accuracy-path"
+        d=""
+        fill="none"
+        stroke="#e11d48"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></path>
+    </svg>
+  </div>
+
+
+  <!-- Loss Chart -->
+  <div class="rounded-2xl border border-[#ede7dc] bg-[#fdfbf7] p-3">
+    <div class="text-[10px] font-mono uppercase font-bold text-[#8b8377] mb-1">
+      Loss (per epoch)
+    </div>
+
+    <svg
+      id="training-loss-chart"
+      viewBox="0 0 280 170"
+      class="w-full h-auto"
+      role="img"
+      aria-label="Training and validation loss across epochs"
+    >
+      <rect
+        x="36"
+        y="16"
+        width="232"
+        height="132"
+        fill="#ffffff"
+        stroke="#ede7dc"
+        rx="6"
+      ></rect>
+
+      <line
+        x1="36" y1="148"
+        x2="268" y2="148"
+        stroke="#c9bfa9"
+        stroke-width="1.5"
+      ></line>
+
+      <line
+        x1="36" y1="16"
+        x2="36" y2="148"
+        stroke="#c9bfa9"
+        stroke-width="1.5"
+      ></line>
+
+      <line
+        x1="152" y1="16"
+        x2="152" y2="148"
+        stroke="#ede7dc"
+        stroke-width="1"
+        stroke-dasharray="2 3"
+      ></line>
+
+      <line
+        x1="36" y1="82"
+        x2="268" y2="82"
+        stroke="#ede7dc"
+        stroke-width="1"
+        stroke-dasharray="2 3"
+      ></line>
+
+      <g
+        font-family="ui-monospace, monospace"
+        font-size="8"
+        fill="#8b8377"
+      >
+        <text x="32" y="20" text-anchor="end">0.30</text>
+        <text x="32" y="85" text-anchor="end">0.15</text>
+        <text x="32" y="152" text-anchor="end">0</text>
+
+        <text x="36" y="162" text-anchor="middle">1</text>
+        <text x="152" y="162" text-anchor="middle">8</text>
+        <text x="268" y="162" text-anchor="middle">16</text>
+      </g>
+
+      <!-- Stage 2 boundary -->
+      <line
+        x1="152"
+        y1="16"
+        x2="152"
+        y2="148"
+        stroke="#b45309"
+        stroke-width="1"
+        stroke-dasharray="4 4"
+        opacity="0.45"
+      ></line>
+
+      <text
+  x="168"
+  y="34"
+  text-anchor="middle"
+  font-family="ui-monospace, monospace"
+  font-size="7"
+  fill="#8b8377"
+>
+  Stage 2
+</text>
+
+      <!-- Training loss -->
+      <path
+        id="training-loss-path"
+        d=""
+        fill="none"
+        stroke="#0f766e"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></path>
+
+      <!-- Validation loss -->
+      <path
+        id="validation-loss-path"
+        d=""
+        fill="none"
+        stroke="#e11d48"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></path>
+    </svg>
+  </div>
+
 </div>
-<div class="rounded-2xl border border-[#ede7dc] bg-[#fdfbf7] p-3">
-<div class="text-[10px] font-mono uppercase font-bold text-[#8b8377] mb-1">Loss (per epoch)</div>
-<svg viewBox="0 0 280 170" class="w-full h-auto" role="img" aria-label="Training and validation loss placeholder">
-<rect x="36" y="16" width="232" height="132" fill="#ffffff" stroke="#ede7dc" rx="6"></rect>
-<line x1="36" y1="148" x2="268" y2="148" stroke="#c9bfa9" stroke-width="1.5"></line>
-<line x1="36" y1="16" x2="36" y2="148" stroke="#c9bfa9" stroke-width="1.5"></line>
-<line x1="152" y1="16" x2="152" y2="148" stroke="#ede7dc" stroke-width="1" stroke-dasharray="2 3"></line>
-<line x1="36" y1="82" x2="268" y2="82" stroke="#ede7dc" stroke-width="1" stroke-dasharray="2 3"></line>
-<g font-family="ui-monospace, monospace" font-size="8" fill="#8b8377">
-<text x="32" y="20" text-anchor="end">high</text>
-<text x="32" y="152" text-anchor="end">0</text>
-<text x="36" y="162" text-anchor="middle">0</text>
-<text x="152" y="162" text-anchor="middle">epochs</text>
-<text x="268" y="162" text-anchor="middle">N</text>
-</g>
-<text x="152" y="85" text-anchor="middle" font-family="ui-monospace, monospace" font-size="10" fill="#5c5650" font-weight="700">Pending model training</text>
-</svg>
+<p class="text-[11px] text-[#5c5650] font-sans">
+  Training and validation accuracy and loss across 16 epochs of CIFAKE model training. Stage 1 trains the classifier head, followed by Stage 2 fine-tuning of the EfficientNetB0 backbone.
+</p>
 </div>
-</div>
-<p class="text-[11px] text-[#5c5650] font-sans">Training and validation accuracy and loss are plotted across training epochs. These curves will be populated from the model's training history once training completes.</p>
-</div>
-<!-- Comparative Table -->
+<!-- Selected Model Architecture -->
 <div class="rounded-3xl bg-white border border-[#e6dfd3] overflow-hidden shadow-xs">
-<div class="px-6 py-4 border-b border-[#e6dfd3] bg-[#faf7f2]">
-<h3 class="text-sm font-bold font-mono text-[#1f242c]">Model Architecture Comparison</h3>
+
+  <div class="px-6 py-4 border-b border-[#e6dfd3] bg-[#faf7f2]">
+    <h3 class="text-sm font-bold font-mono text-[#1f242c]">
+      Selected Model Architecture
+    </h3>
+  </div>
+
+  <div class="px-6 py-4 border-b border-[#ede7dc] bg-[#fdfbf8]">
+    <p class="text-[11px] text-[#5c5650] font-sans leading-relaxed">
+      ImageGuard uses EfficientNetB0 with transfer learning for REAL vs AI-GENERATED image classification.
+      The model was trained on CIFAKE and evaluated on 20,000 held-out test images.
+    </p>
+  </div>
+
+  <div class="overflow-x-auto">
+    <table class="w-full text-left font-mono text-xs text-[#1f242c]">
+
+      <thead class="bg-[#fdfbf8] text-[#5c5650] border-b border-[#e6dfd3] uppercase">
+        <tr>
+          <th class="py-3 px-6">Model Architecture</th>
+          <th class="py-3 px-6">Accuracy</th>
+          <th class="py-3 px-6">Precision</th>
+          <th class="py-3 px-6">Recall</th>
+          <th class="py-3 px-6">F1-Score</th>
+          <th class="py-3 px-6 text-right">Inference Latency</th>
+        </tr>
+      </thead>
+
+      <tbody class="divide-y divide-[#ede7dc]">
+
+        <tr class="bg-rose-50/50 font-semibold">
+
+          <td class="py-3.5 px-6 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-rose-600"></span>
+
+            <span>EfficientNetB0 (Transfer Learning)</span>
+
+            <span class="text-[9px] px-1.5 py-0.2 rounded bg-rose-700 text-white font-bold">
+              DEPLOYED
+            </span>
+          </td>
+
+          <td
+            id="architecture-accuracy"
+            class="py-3.5 px-6 text-emerald-800 font-bold"
+          >
+            —
+          </td>
+
+          <td
+            id="architecture-precision"
+            class="py-3.5 px-6"
+          >
+            —
+          </td>
+
+          <td
+            id="architecture-recall"
+            class="py-3.5 px-6"
+          >
+            —
+          </td>
+
+          <td
+            id="architecture-f1"
+            class="py-3.5 px-6 text-rose-700 font-bold"
+          >
+            —
+          </td>
+
+          <td
+            id="architecture-latency"
+            class="py-3.5 px-6 text-right text-teal-800 font-bold"
+          >
+            —
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+  </div>
+
 </div>
-<div class="overflow-x-auto">
-<table class="w-full text-left font-mono text-xs text-[#1f242c]">
-<thead class="bg-[#fdfbf8] text-[#5c5650] border-b border-[#e6dfd3] uppercase">
-<tr>
-<th class="py-3 px-6">Model Architecture</th>
-<th class="py-3 px-6">Accuracy</th>
-<th class="py-3 px-6">Precision</th>
-<th class="py-3 px-6">Recall</th>
-<th class="py-3 px-6">F1-Score</th>
-<th class="py-3 px-6 text-right">Inference Latency</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-[#ede7dc]">
-<tr class="bg-rose-50/50 font-semibold">
-<td class="py-3.5 px-6 flex items-center gap-2">
-<span class="w-2 h-2 rounded-full bg-rose-600"></span>
-<span>EfficientNetB0 (Transfer Learning)</span>
-<span class="text-[9px] px-1.5 py-0.2 rounded bg-rose-700 text-white font-bold">DEPLOYED</span>
-</td>
-<td class="py-3.5 px-6 text-emerald-800 font-bold">—</td>
-<td class="py-3.5 px-6">—</td>
-<td class="py-3.5 px-6">—</td>
-<td class="py-3.5 px-6 text-rose-700 font-bold">—</td>
-<td class="py-3.5 px-6 text-right text-teal-800 font-bold">—</td>
-</tr>
-<tr>
-<td class="py-3.5 px-6 font-semibold">ResNet50 (Transfer Learning)</td>
-<td class="py-3.5 px-6">—</td>
-<td class="py-3.5 px-6">—</td>
-<td class="py-3.5 px-6">—</td>
-<td class="py-3.5 px-6">—</td>
-<td class="py-3.5 px-6 text-right text-[#6e675f]">—</td>
-</tr>
-<tr>
-<td class="py-3.5 px-6 font-semibold">Custom CNN (Baseline)</td>
-<td class="py-3.5 px-6">—</td>
-<td class="py-3.5 px-6">—</td>
-<td class="py-3.5 px-6">—</td>
-<td class="py-3.5 px-6">—</td>
-<td class="py-3.5 px-6 text-right text-[#6e675f]">—</td>
-</tr>
-<tr>
-<td class="py-3.5 px-6 font-semibold">MobileNetV3 (Lightweight)</td>
-<td class="py-3.5 px-6">—</td>
-<td class="py-3.5 px-6">—</td>
-<td class="py-3.5 px-6">—</td>
-<td class="py-3.5 px-6">—</td>
-<td class="py-3.5 px-6 text-right text-[#6e675f]">—</td>
-</tr>
-</tbody>
-</table>
+
+
+<!--
+FUTURE MODEL ARCHITECTURE COMPARISON TABLE
+
+Preserved from the original design.
+
+This comparison should only be displayed after ResNet50,
+Custom CNN, and MobileNetV3 have actually been trained and
+evaluated using the same CIFAKE experimental setup.
+
+DO NOT use these rows as experimental results until those
+models have been independently evaluated.
+
+<div class="rounded-3xl bg-white border border-[#e6dfd3] overflow-hidden shadow-xs">
+
+  <div class="px-6 py-4 border-b border-[#e6dfd3] bg-[#faf7f2]">
+    <h3 class="text-sm font-bold font-mono text-[#1f242c]">
+      Model Architecture Comparison
+    </h3>
+  </div>
+
+  <div class="overflow-x-auto">
+    <table class="w-full text-left font-mono text-xs text-[#1f242c]">
+
+      <thead class="bg-[#fdfbf8] text-[#5c5650] border-b border-[#e6dfd3] uppercase">
+        <tr>
+          <th class="py-3 px-6">Model Architecture</th>
+          <th class="py-3 px-6">Accuracy</th>
+          <th class="py-3 px-6">Precision</th>
+          <th class="py-3 px-6">Recall</th>
+          <th class="py-3 px-6">F1-Score</th>
+          <th class="py-3 px-6 text-right">Inference Latency</th>
+        </tr>
+      </thead>
+
+      <tbody class="divide-y divide-[#ede7dc]">
+
+        <tr class="bg-rose-50/50 font-semibold">
+          <td class="py-3.5 px-6 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-rose-600"></span>
+            <span>EfficientNetB0 (Transfer Learning)</span>
+            <span class="text-[9px] px-1.5 py-0.2 rounded bg-rose-700 text-white font-bold">
+              DEPLOYED
+            </span>
+          </td>
+
+          <td class="py-3.5 px-6 text-emerald-800 font-bold">—</td>
+          <td class="py-3.5 px-6">—</td>
+          <td class="py-3.5 px-6">—</td>
+          <td class="py-3.5 px-6 text-rose-700 font-bold">—</td>
+          <td class="py-3.5 px-6 text-right text-teal-800 font-bold">—</td>
+        </tr>
+
+        <tr>
+          <td class="py-3.5 px-6 font-semibold">
+            ResNet50 (Transfer Learning)
+          </td>
+          <td class="py-3.5 px-6">—</td>
+          <td class="py-3.5 px-6">—</td>
+          <td class="py-3.5 px-6">—</td>
+          <td class="py-3.5 px-6">—</td>
+          <td class="py-3.5 px-6 text-right text-[#6e675f]">—</td>
+        </tr>
+
+        <tr>
+          <td class="py-3.5 px-6 font-semibold">
+            Custom CNN (Baseline)
+          </td>
+          <td class="py-3.5 px-6">—</td>
+          <td class="py-3.5 px-6">—</td>
+          <td class="py-3.5 px-6">—</td>
+          <td class="py-3.5 px-6">—</td>
+          <td class="py-3.5 px-6 text-right text-[#6e675f]">—</td>
+        </tr>
+
+        <tr>
+          <td class="py-3.5 px-6 font-semibold">
+            MobileNetV3 (Lightweight)
+          </td>
+          <td class="py-3.5 px-6">—</td>
+          <td class="py-3.5 px-6">—</td>
+          <td class="py-3.5 px-6">—</td>
+          <td class="py-3.5 px-6">—</td>
+          <td class="py-3.5 px-6 text-right text-[#6e675f]">—</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+  </div>
+
 </div>
-</div>
+
+END-->
 </main>
 <!-- ================= TAB 3: ABOUT & PIPELINE ================= -->
 <main class="tab-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8" id="tab-pipeline">
@@ -944,7 +1226,7 @@
 </div>
 <h3 class="text-xl font-bold text-[#1f242c]">Deep-Learning Visual Authenticity Classification</h3>
 <p class="text-[#5c5650] text-xs leading-relaxed">
-          Instead of relying on manual inspection, ImageGuard applies a transfer-learned CNN (EfficientNetB0 / ResNet) to the image's visual features and uses Grad-CAM to highlight the regions that drove the model's real-vs-AI-generated decision.
+          Instead of relying on manual inspection, ImageGuard applies a transfer-learned EfficientNetB0 CNN to the image's visual features and uses Grad-CAM to highlight the regions that drove the model's real-vs-AI-generated decision.
         </p>
 </div>
 </div>
@@ -977,7 +1259,7 @@
 <div class="p-4 rounded-2xl bg-[#faf7f2] border border-[#ded5c5] space-y-2">
 <div class="text-[10px] text-teal-800 font-bold">STEP 02</div>
 <div class="font-bold text-[#1f242c]">Image Preprocessing</div>
-<p class="text-[11px] text-[#5c5650] font-sans">Resize to the model's input resolution, normalize pixel values, and arrange color channels.</p>
+<p class="text-[11px] text-[#5c5650] font-sans">Resize the image to 224×224, convert it to RGB, and prepare it for EfficientNetB0 inference.</p>
 </div>
 <div class="p-4 rounded-2xl bg-[#faf7f2] border border-[#ded5c5] space-y-2">
 <div class="text-[10px] text-teal-800 font-bold">STEP 03</div>
@@ -987,7 +1269,7 @@
 <div class="p-4 rounded-2xl bg-[#faf7f2] border border-[#ded5c5] space-y-2">
 <div class="text-[10px] text-teal-800 font-bold">STEP 04</div>
 <div class="font-bold text-[#1f242c]">Transfer-Learning Inference</div>
-<p class="text-[11px] text-[#5c5650] font-sans">The EfficientNetB0 / ResNet backbone produces a real-vs-synthetic probability.</p>
+<p class="text-[11px] text-[#5c5650] font-sans">The EfficientNetB backbone produces a real-vs-AI-generated probability.</p>
 </div>
 <div class="p-4 rounded-2xl bg-[#faf7f2] border border-[#ded5c5] space-y-2">
 <div class="text-[10px] text-rose-700 font-bold">STEP 05</div>
@@ -1017,13 +1299,9 @@
 <h4 class="text-sm font-bold font-mono text-[#1f242c]">Technology Stack</h4>
 <p class="text-xs text-[#5c5650] font-mono"><span class="text-teal-800 font-bold">Frontend:</span> HTML · CSS · JavaScript · Tailwind CSS</p>
 <p class="text-xs text-[#5c5650] font-mono"><span class="text-teal-800 font-bold">Backend:</span> Python · Flask</p>
-<p class="text-xs text-[#5c5650] font-mono"><span class="text-teal-800 font-bold">Machine Learning:</span> CNN / Transfer Learning · EfficientNetB0 · ResNet</p>
+<p class="text-xs text-[#5c5650] font-mono"><span class="text-teal-800 font-bold">Machine Learning:</span> Machine Learning: EfficientNetB0 · Transfer Learning · Fine-Tuning</p>
 <p class="text-xs text-[#5c5650] font-mono"><span class="text-teal-800 font-bold">Explainability:</span> Grad-CAM</p>
-<p class="text-xs text-[#5c5650] font-mono"><span class="text-teal-800 font-bold">Dataset:</span> CIFAKE — Real and AI-Generated Synthetic Images</p>
-</div>
-<div class="flex items-center gap-2 flex-wrap justify-center">
-<span class="px-3 py-1 rounded-full bg-[#faf7f2] border border-[#ded5c5] text-xs font-mono text-teal-800">Python / Flask</span>
-<span class="px-3 py-1 rounded-full bg-[#faf7f2] border border-[#ded5c5] text-xs font-mono text-rose-800 font-bold">CIFAKE Dataset</span>
+<p class="text-xs text-[#5c5650] font-mono"><span class="text-teal-800 font-bold">Dataset:</span> CIFAKE - Real and AI-Generated Images</p>
 </div>
 </div>
 </main>
@@ -1032,10 +1310,10 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
 <div class="flex items-center gap-2 text-[#5c5650]">
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shield" aria-hidden="true" class="lucide lucide-shield w-4 h-4 text-rose-600"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path></svg>
-<span>ImageGuard — AI-Powered Image Authenticity Detection © 2026.</span>
+<span>ImageGuard - Machine Learning-Based Image Authenticity Detection © 2026.</span>
 </div>
 <div class="flex items-center space-x-6">
-<span class="hover:text-[#1f242c] transition-colors">140,000 Images Evaluated</span>
+<span class="hover:text-[#1f242c] transition-colors">20,000 Test Images Evaluated</span>
 <span class="hover:text-[#1f242c] transition-colors">CIFAKE Dataset</span>
 <span class="hover:text-[#1f242c] transition-colors">Grad-CAM Explainability</span>
 </div>
@@ -1045,15 +1323,13 @@
 <script>
 /* ============================================================
    ImageGuard — AI-Generated Image Detection Controller
-   Modular frontend logic. The mock prediction path is a stand-in
-   so the UI is demonstrable before the model is connected. Swap
-   in the real Flask API response without touching the interface.
+   Modular frontend logic connected to the real ImageGuard Flask API.
    Expected backend endpoint: POST /api/analyze  (multipart "image")
    Expected JSON: { prediction:"REAL"|"AI-GENERATED", confidence:0..1,
                     model:"EfficientNetB0", processingTime:1.23,
                     gradcam:<data-url|null> }
    ============================================================ */
-const API_ENDPOINT = '/api/analyze';
+const API_ENDPOINT = (window.IMAGEGUARD_API_BASE || 'http://127.0.0.1:5000') + '/api/analyze';
 const LOADING_MSGS = [
   ['Analyzing image...', 'Extracting visual features...'],
   ['Analyzing image...', 'Running authenticity analysis...'],
@@ -1121,7 +1397,7 @@ function clearImage(){
   currentFile = null;
   currentImageMeta = null;
   const input = $('imageInput'); if (input) input.value = '';
-  const name = $('heroFileName'); if (name) name.textContent = 'Choose an image to analyze';
+  const name = $('heroFileName'); if (name) name.textContent = 'Choose an image to analyze(32x32)';
   const status = $('heroStatusText'); if (status) status.textContent = 'READY TO ANALYZE';
 }
 
@@ -1152,8 +1428,7 @@ function computeCharacteristics(file, img){
     dimensions: (img.naturalWidth||0)+' × '+(img.naturalHeight||0),
     fileSize: fmtSize(file.size),
     aspectRatio: fmtRatio(img.naturalWidth||1, img.naturalHeight||1),
-    colorMode,
-    metadata: (file.type==='image/jpeg'||file.type==='image/webp') ? 'Likely EXIF' : 'Not parsed'
+    colorMode
   };
 }
 
@@ -1164,7 +1439,6 @@ function renderCharacteristics(m){
   set('grid-https', m.fileSize);
   set('grid-ip', m.aspectRatio);
   set('grid-subdomains', m.colorMode);
-  set('grid-symbols', m.metadata);
   set('grid-similarity', m.fileFormat);
   set('grid-entropy', m.fileName.length>22 ? m.fileName.slice(0,20)+'…' : m.fileName);
 }
@@ -1186,7 +1460,9 @@ async function runAnalysis(file){
   catch(err){
     clearInterval(cycle);
     if(btn) btn.disabled=false;
-    showUploadError('IMAGE ANALYSIS FAILED');
+    console.error('ImageGuard backend error:', err);
+    showUploadError(err && err.name === 'AbortError' ? 'ANALYSIS TIMED OUT' : 'BACKEND UNAVAILABLE');
+    if(status) status.textContent = 'ANALYSIS FAILED';
     return;
   }
   const elapsed=performance.now()-start;
@@ -1198,15 +1474,29 @@ async function runAnalysis(file){
 }
 
 async function analyzeImage(file){
+  const fd = new FormData();
+  fd.append('image', file);
+
+  const ctrl = new AbortController();
+  const to = setTimeout(() => ctrl.abort(), 30000);
+
   try{
-    const fd=new FormData(); fd.append('image', file);
-    const ctrl=new AbortController(); const to=setTimeout(()=>ctrl.abort(), 15000);
-    const res=await fetch(API_ENDPOINT,{ method:'POST', body:fd, signal:ctrl.signal });
+    const res = await fetch(API_ENDPOINT, {
+      method: 'POST',
+      body: fd,
+      signal: ctrl.signal
+    });
+
+    let payload = null;
+    try { payload = await res.json(); } catch (_) {}
+
+    if (!res.ok){
+      throw new Error((payload && payload.error) || `Backend error (${res.status})`);
+    }
+
+    return normalizeResult(payload, file);
+  } finally {
     clearTimeout(to);
-    if (res.ok){ const j=await res.json(); return normalizeResult(j, file); }
-    throw new Error('Bad response');
-  }catch(e){
-    return mockResult(file);
   }
 }
 
@@ -1222,20 +1512,6 @@ function normalizeResult(j, file){
   };
 }
 
-function mockResult(file){
-  /* Deterministic placeholder — not a real prediction. Replaced by backend response. */
-  const seed=hashStr((file.name||'')+file.size);
-  const aigen = seed % 2 === 0;
-  const confidence = 0.55 + (seed % 44)/100;
-  return {
-    prediction: aigen ? 'AI-GENERATED' : 'REAL',
-    confidence,
-    model: 'EfficientNetB0',
-    processingTime: 0.8 + (seed % 40)/100,
-    gradcam: null,
-    source: 'mock'
-  };
-}
 
 /* ---------- render result ---------- */
 function renderResult(result, file){
@@ -1277,10 +1553,21 @@ function renderResult(result, file){
   ['badge-url-len','badge-subdomains','badge-brand','badge-hyphens','badge-tld'].forEach(id=>{
     const e=$(id); if(e){ e.className='px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200'; e.textContent='COMPLETE'; }
   });
-  const lat=$('mascotLatency'); if(lat) lat.textContent = result.source==='mock' ? 'Demo mode' : (result.processingTime?result.processingTime.toFixed(2)+' s':'—');
+  const lat=$('mascotLatency'); if(lat) lat.textContent = result.processingTime ? result.processingTime.toFixed(2)+' s' : '—';
 
   const ow=$('gradcamOriginalWrap');
-  if (ow && currentPreviewUrl){ ow.innerHTML='<img src="'+currentPreviewUrl+'" alt="Original image" class="max-w-full max-h-[220px] object-contain rounded-lg">'; }
+  if (ow && currentPreviewUrl){
+  ow.innerHTML='<img src="'+currentPreviewUrl+'" alt="Original image" class="w-full h-[220px] object-contain rounded-lg" style="image-rendering: pixelated;">';
+}
+
+  const hw=$('gradcamHeatmapWrap');
+  if (hw){
+    if (result.gradcam){
+  hw.innerHTML='<img src="'+result.gradcam+'" alt="Grad-CAM model attention overlay" class="w-full h-[220px] object-contain rounded-lg">';
+} else {
+      hw.innerHTML='<span class="text-[11px] font-mono text-[#8b8377] text-center px-3">Grad-CAM output unavailable.</span>';
+    }
+  }
 
   const rs=$('analysis-results'), rb=$('resultsBlock');
   if (rs) rs.classList.remove('hidden');
@@ -1304,13 +1591,24 @@ function setCompanionState(state, conf){
   const p=$('companionParticles'); if(p) p.innerHTML='';
   const c = (conf==null)?'—':conf.toFixed(1)+'%';
 
-  if (state==='real'){ applyRealOctopus(); setTitle('REAL • '+c+' Confidence','Tentacles joyful & dancing. Image classified as authentic with strong model confidence.'); }
-  else if (state==='aigen'){ applyAIGeneratedOctopus(); setTitle('AI-GENERATED • '+c+' Confidence','Tentacles agitated & alert. Image classified as AI-generated by the model.'); }
-  else { applyUncertainOctopus(); setTitle('UNCERTAIN • '+c+' Confidence','Head tilted, low model confidence. Prediction sits close to the decision boundary.'); }
+  if (state==='real'){
+  applyRealOctopus();
+  setTitle('REAL • '+c+' Confidence');
+}
+else if (state==='aigen'){
+  applyAIGeneratedOctopus();
+  setTitle('AI-GENERATED • '+c+' Confidence');
+}
+else {
+  applyUncertainOctopus();
+  setTitle('UNCERTAIN • '+c+' Confidence');
+}
   if (window.lucide) lucide.createIcons();
 }
-function setTitle(t,d){ const a=$('companionTitle'),b=$('companionDesc'); if(a)a.textContent=t; if(b)b.textContent=d; }
-
+function setTitle(t){
+  const a = $('companionTitle');
+  if (a) a.textContent = t;
+}
 function applyRealOctopus(){
   const b=$('companionBodyGroup'); if(b) b.classList.add('mascot-dance');
   const m=$('octopusMantle'); if(m) m.setAttribute('fill','url(#octoGradSafe)');
@@ -1343,7 +1641,7 @@ function applyAIGeneratedOctopus(){
 function initHeroUpload(){
   const input=$('imageInput'), name=$('heroFileName'), btn=$('heroAnalyzeImage'), status=$('heroStatusText'), hero=$('heroUpload');
   if(!input || !hero) return;
-  const sync=()=>{ if(name) name.textContent=currentFile ? currentFile.name : 'Choose an image to analyze'; };
+  const sync=()=>{ if(name) name.textContent=currentFile ? currentFile.name : 'Choose an image to analyze(32x32)'; };
   input.addEventListener('change',()=>{
     if(input.files && input.files[0]) handleFile(input.files[0]);
     sync();
@@ -1378,5 +1676,381 @@ document.addEventListener('DOMContentLoaded', ()=>{
   initHeroUpload();
   if (window.lucide) lucide.createIcons();
 });
+
+async function loadPerformanceMetrics() {
+  try {
+    const response = await fetch("http://127.0.0.1:5000/api/metrics");
+
+    if (!response.ok) {
+      throw new Error(`Metrics API returned ${response.status}`);
+    }
+
+    const metrics = await response.json();
+
+    // ---------- Accuracy ----------
+    const accuracyElement = document.getElementById("performance-accuracy");
+    const accuracyLabel = document.getElementById("performance-accuracy-label");
+
+    if (accuracyElement) {
+      accuracyElement.textContent =
+        `${(Number(metrics.accuracy) * 100).toFixed(2)}%`;
+    }
+
+    if (accuracyLabel) {
+      accuracyLabel.textContent =
+        "Test accuracy • 20,000 images";
+    }
+
+    // ---------- ROC-AUC ----------
+    const rocAucElement = document.getElementById("performance-roc-auc");
+    const rocAucLabel = document.getElementById("performance-roc-auc-label");
+
+    if (rocAucElement) {
+      rocAucElement.textContent =
+        `${(Number(metrics.auc) * 100).toFixed(2)}%`;
+    }
+
+    if (rocAucLabel) {
+      rocAucLabel.textContent =
+        "Test ROC-AUC • 20,000 images";
+    }
+
+    // ---------- Inference Time ----------
+    const inferenceTimeElement =
+      document.getElementById("performance-inference-time");
+
+    const inferenceTimeLabel =
+      document.getElementById("performance-inference-time-label");
+
+    if (inferenceTimeElement) {
+      inferenceTimeElement.textContent =
+        `${Number(metrics.inference.average_ms_per_image).toFixed(3)} ms`;
+    }
+
+    if (inferenceTimeLabel) {
+      inferenceTimeLabel.textContent =
+        "Average per image • GPU benchmark";
+    }
+    
+    // ---------- Confusion Matrix ----------
+const confusionMatrix = metrics.confusion_matrix;
+
+if (confusionMatrix && typeof confusionMatrix === "object") {
+
+  const truePositiveReal =
+    Number(confusionMatrix.true_real_pred_real);
+
+  const falseNegativeAiAsReal =
+    Number(confusionMatrix.true_ai_pred_real);
+
+  const falsePositiveRealAsAi =
+    Number(confusionMatrix.true_real_pred_ai);
+
+  const trueNegativeAiGenerated =
+    Number(confusionMatrix.true_ai_pred_ai);
+
+  // True Positive
+  const tp = document.getElementById("performance-tp");
+  const tpLabel = document.getElementById("performance-tp-label");
+
+  if (tp) {
+    tp.textContent = truePositiveReal.toLocaleString();
+  }
+
+  if (tpLabel) {
+    tpLabel.textContent = "Correct REAL predictions";
+  }
+
+  // False Negative
+  const fn = document.getElementById("performance-fn");
+  const fnLabel = document.getElementById("performance-fn-label");
+
+  if (fn) {
+    fn.textContent = falseNegativeAiAsReal.toLocaleString();
+  }
+
+  if (fnLabel) {
+    fnLabel.textContent = "AI images classified as REAL";
+  }
+
+  // False Positive
+  const fp = document.getElementById("performance-fp");
+  const fpLabel = document.getElementById("performance-fp-label");
+
+  if (fp) {
+    fp.textContent = falsePositiveRealAsAi.toLocaleString();
+  }
+
+  if (fpLabel) {
+    fpLabel.textContent = "REAL images classified as AI";
+  }
+
+  // True Negative
+  const tn = document.getElementById("performance-tn");
+  const tnLabel = document.getElementById("performance-tn-label");
+
+  if (tn) {
+    tn.textContent = trueNegativeAiGenerated.toLocaleString();
+  }
+
+  if (tnLabel) {
+    tnLabel.textContent = "Correct AI predictions";
+  }
+}
+
+// ---------- ROC Curve ----------
+const rocPath = document.getElementById("performance-roc-path");
+const rocAucChart = document.getElementById("performance-roc-auc-chart");
+
+const fpr = metrics.roc_curve.fpr;
+const tpr = metrics.roc_curve.tpr;
+
+if (
+  rocPath &&
+  Array.isArray(fpr) &&
+  Array.isArray(tpr) &&
+  fpr.length === tpr.length &&
+  fpr.length > 1
+) {
+  const chartLeft = 48;
+  const chartBottom = 200;
+  const chartWidth = 252;
+  const chartHeight = 176;
+
+  let pathData = "";
+
+  for (let i = 0; i < fpr.length; i++) {
+    const x = chartLeft + (Number(fpr[i]) * chartWidth);
+    const y = chartBottom - (Number(tpr[i]) * chartHeight);
+
+    pathData +=
+      `${i === 0 ? "M" : "L"} ${x.toFixed(2)} ${y.toFixed(2)} `;
+  }
+
+  rocPath.setAttribute("d", pathData.trim());
+}
+
+if (rocAucChart) {
+  rocAucChart.textContent =
+    `AUC: ${(Number(metrics.auc) * 100).toFixed(2)}%`;
+}
+
+    // Selected Model Architecture
+    const architectureAccuracy =
+      document.getElementById("architecture-accuracy");
+
+    const architecturePrecision =
+      document.getElementById("architecture-precision");
+
+    const architectureRecall =
+      document.getElementById("architecture-recall");
+
+    const architectureF1 =
+      document.getElementById("architecture-f1");
+
+    const architectureLatency =
+      document.getElementById("architecture-latency");
+
+    if (architectureAccuracy) {
+      architectureAccuracy.textContent =
+        `${(Number(metrics.accuracy) * 100).toFixed(2)}%`;
+    }
+
+    if (architecturePrecision) {
+      architecturePrecision.textContent =
+        `${(Number(metrics.precision) * 100).toFixed(2)}%`;
+    }
+
+    if (architectureRecall) {
+      architectureRecall.textContent =
+        `${(Number(metrics.recall) * 100).toFixed(2)}%`;
+    }
+
+    if (architectureF1) {
+      architectureF1.textContent =
+        `${(Number(metrics.f1) * 100).toFixed(2)}%`;
+    }
+
+    if (architectureLatency) {
+      architectureLatency.textContent =
+        `${Number(metrics.inference.average_ms_per_image).toFixed(3)} ms`;
+    }
+
+  } catch (error) {
+    console.error("Failed to load performance metrics:", error);
+
+    const accuracyElement =
+      document.getElementById("performance-accuracy");
+
+    const accuracyLabel =
+      document.getElementById("performance-accuracy-label");
+
+    if (accuracyElement) {
+      accuracyElement.textContent = "—";
+    }
+
+    if (accuracyLabel) {
+      accuracyLabel.textContent = "Metrics unavailable";
+    }
+  }
+}
+loadPerformanceMetrics();
+
+// ---------- Training & Validation Curves ----------
+async function loadTrainingHistory() {
+  try {
+    const response = await fetch(
+      "http://127.0.0.1:5000/api/training-history"
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Training history API returned ${response.status}`
+      );
+    }
+
+    const history = await response.json();
+
+    const epochs = history.epochs;
+    const accuracy = history.accuracy;
+    const valAccuracy = history.val_accuracy;
+    const loss = history.loss;
+    const valLoss = history.val_loss;
+
+    if (
+      !Array.isArray(epochs) ||
+      !Array.isArray(accuracy) ||
+      !Array.isArray(valAccuracy) ||
+      !Array.isArray(loss) ||
+      !Array.isArray(valLoss)
+    ) {
+      throw new Error("Invalid training history format");
+    }
+
+    // Chart dimensions
+    const chartLeft = 36;
+    const chartRight = 268;
+    const chartTop = 16;
+    const chartBottom = 148;
+
+    const chartWidth = chartRight - chartLeft;
+    const chartHeight = chartBottom - chartTop;
+
+    // Convert epoch/value arrays into SVG path data
+    function buildPath(values, minValue, maxValue) {
+      let path = "";
+
+      for (let i = 0; i < values.length; i++) {
+
+        const x =
+          chartLeft +
+          (i / (values.length - 1)) * chartWidth;
+
+        const normalized =
+          (Number(values[i]) - minValue) /
+          (maxValue - minValue);
+
+        const y =
+          chartBottom -
+          normalized * chartHeight;
+
+        path +=
+          `${i === 0 ? "M" : "L"} ` +
+          `${x.toFixed(2)} ${y.toFixed(2)} `;
+      }
+
+      return path.trim();
+    }
+
+    // Accuracy uses fixed 0–1 scale
+    const accuracyTrainPath = buildPath(
+      accuracy,
+      0,
+      1
+    );
+
+    const accuracyValidationPath = buildPath(
+      valAccuracy,
+      0,
+      1
+    );
+
+    // Loss uses fixed 0–0.30 scale
+    const lossTrainPath = buildPath(
+      loss,
+      0,
+      0.30
+    );
+
+    const lossValidationPath = buildPath(
+      valLoss,
+      0,
+      0.30
+    );
+
+    // Apply paths
+    const trainingAccuracyPath =
+      document.getElementById(
+        "training-accuracy-path"
+      );
+
+    const validationAccuracyPath =
+      document.getElementById(
+        "validation-accuracy-path"
+      );
+
+    const trainingLossPath =
+      document.getElementById(
+        "training-loss-path"
+      );
+
+    const validationLossPath =
+      document.getElementById(
+        "validation-loss-path"
+      );
+
+    if (trainingAccuracyPath) {
+      trainingAccuracyPath.setAttribute(
+        "d",
+        accuracyTrainPath
+      );
+    }
+
+    if (validationAccuracyPath) {
+      validationAccuracyPath.setAttribute(
+        "d",
+        accuracyValidationPath
+      );
+    }
+
+    if (trainingLossPath) {
+      trainingLossPath.setAttribute(
+        "d",
+        lossTrainPath
+      );
+    }
+
+    if (validationLossPath) {
+      validationLossPath.setAttribute(
+        "d",
+        lossValidationPath
+      );
+    }
+
+    console.log(
+      "Training history loaded successfully:",
+      epochs.length,
+      "epochs"
+    );
+
+  } catch (error) {
+    console.error(
+      "Failed to load training history:",
+      error
+    );
+  }
+}
+
+loadTrainingHistory();
 </script>
 </body></html>
