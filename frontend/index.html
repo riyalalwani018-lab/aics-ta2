@@ -439,7 +439,7 @@
 </div>
 <!-- Navigation Tabs -->
 <nav class="flex items-center space-x-1 sm:space-x-2 font-mono text-xs">
-<button class="nav-tab-btn px-3 py-2 rounded-lg text-[#1f242c] bg-white shadow-xs text-xs flex items-center gap-1.5 transition-colors font-medium" id="nav-btn-analyzer" onclick="switchTab('analyzer')">
+<button class="nav-tab-btn px-3 py-2 rounded-lg text-[#1f242c] bg-white border border-[#ded5c5] shadow-xs text-xs flex items-center gap-1.5 transition-colors font-medium" id="nav-btn-analyzer" onclick="switchTab('analyzer')">
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="crosshair" aria-hidden="true" class="lucide lucide-crosshair w-3.5 h-3.5 text-rose-600"><circle cx="12" cy="12" r="10"></circle><line x1="22" x2="18" y1="12" y2="12"></line><line x1="6" x2="2" y1="12" y2="12"></line><line x1="12" x2="12" y1="6" y2="2"></line><line x1="12" x2="12" y1="22" y2="18"></line></svg>
 <span>Image Analyzer</span>
 </button>
@@ -1616,12 +1616,12 @@ function acceptedType(t){ return ['image/jpeg','image/jpg','image/png','image/we
 function switchTab(tabKey){
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.nav-tab-btn').forEach(btn => {
-    btn.classList.remove('bg-white','text-[#1f242c]','border-[#ded5c5]','shadow-xs','font-medium');
+    btn.classList.remove('border','border-[#ded5c5]','bg-white','text-[#1f242c]','shadow-xs','font-medium');
     btn.classList.add('text-[#5c5650]');
   });
   const sec = $('tab-'+tabKey), btn = $('nav-btn-'+tabKey);
   if (sec) sec.classList.add('active');
-  if (btn){ btn.classList.add('bg-white','text-[#1f242c]','border-[#ded5c5]','shadow-xs','font-medium'); btn.classList.remove('text-[#5c5650]'); }
+  if (btn){ btn.classList.add('bg-white','text-[#1f242c]','border','border-[#ded5c5]','shadow-xs','font-medium'); btn.classList.remove('text-[#5c5650]'); }
   window.scrollTo({ top:0, behavior:'smooth' });
 }
 
