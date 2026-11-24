@@ -1,7 +1,7 @@
 <!DOCTYPE html><html class="scroll-smooth" lang="en"><svg class="inline-defs-container" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"></svg><head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Pixi — Machine Learning-Based Image Authenticity Detection</title>
+<title>ImageGuard - Machine Learning-Based Image Authenticity Detection</title>
 <!-- Tailwind CSS v3 with Plugins -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script>
@@ -431,7 +431,7 @@
 </div>
 <div class="flex flex-col">
 <div class="flex items-center gap-1.5">
-<span class="text-lg font-black tracking-tight text-[#1f242c] font-mono">Pixi</span>
+<span class="text-lg font-black tracking-tight text-[#1f242c] font-mono">ImageGuard</span>
 </div>
 <span class="text-[10px] text-[#6e675f] font-mono hidden sm:inline">Machine Learning-Based Image Authenticity Detection</span>
 </div>
@@ -475,7 +475,7 @@
     <div class="hero-upload-positioner">
       <div id="heroUpload" class="hero-upload" role="group" aria-label="Image upload">
         <input type="file" id="imageInput" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" class="hidden" aria-label="Choose an image">
-        <div class="hero-windowbar"><span class="hero-dot hero-dot-pink"></span><span class="hero-dot hero-dot-cream"></span><span class="hero-dot hero-dot-purple"></span><span class="hero-window-title">Pixi</span><span class="hero-window-label">AUTHENTICITY SCAN</span></div>
+        <div class="hero-windowbar"><span class="hero-dot hero-dot-pink"></span><span class="hero-dot hero-dot-cream"></span><span class="hero-dot hero-dot-purple"></span><span class="hero-window-title">ImageGuard</span><span class="hero-window-label">AUTHENTICITY SCAN</span></div>
         <div class="hero-upload-body">
           <div class="hero-upload-heading"><span>UPLOAD IMAGE</span><span>JPG · PNG · WEBP</span></div>
           <label for="imageInput" class="hero-file-box"><span id="heroFileName">Choose an image to analyze(32x32)</span><span class="hero-browse">BROWSE</span></label>
@@ -517,7 +517,7 @@
 <!-- ================= COMPANION MASCOT FIGURINE (5 COLS) ================= -->
 <div class="lg:col-span-5 rounded-3xl bg-white border border-[#e6dfd3] p-6 flex flex-col shadow-xs relative overflow-hidden">
   <div class="flex items-center">
-    <span class="text-xs font-mono text-[#1f242c] font-semibold uppercase tracking-wider">Meet Pixi</span>
+    <span class="text-xs font-mono text-[#1f242c] font-semibold uppercase tracking-wider">Meet Pixi!</span>
   </div>
 
   <div class="flex-1 flex flex-col items-center justify-center relative min-h-[330px]">
@@ -1282,7 +1282,7 @@
 
   <div class="px-6 py-4 border-b border-[#ede7dc] bg-[#fdfbf8]">
     <p class="text-[11px] text-[#5c5650] font-sans leading-relaxed">
-      Pixi uses EfficientNetB0 with transfer learning for REAL vs AI-GENERATED image classification.
+      ImageGuard uses EfficientNetB0 with transfer learning for REAL vs AI-GENERATED image classification.
       The model was trained on CIFAKE and evaluated on 20,000 held-out test images.
     </p>
   </div>
@@ -1465,7 +1465,7 @@ END-->
         AI-Generated Image Detection Using Deep Learning
       </h2>
 <p class="text-[#5c5650] text-sm mt-1 max-w-3xl">
-        Pixi uses deep learning and computer vision to classify images as real or AI-generated. Trained on the CIFAKE dataset of real and AI-generated synthetic images, it supports digital media authenticity and cybersecurity analysis.
+        ImageGuard uses deep learning and computer vision to classify images as real or AI-generated. Trained on the CIFAKE dataset of real and AI-generated synthetic images, it supports digital media authenticity and cybersecurity analysis.
       </p>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1486,7 +1486,7 @@ END-->
 </div>
 <h3 class="text-xl font-bold text-[#1f242c]">Deep-Learning Visual Authenticity Classification</h3>
 <p class="text-[#5c5650] text-xs leading-relaxed">
-          Instead of relying on manual inspection, Pixi applies a transfer-learned EfficientNetB0 CNN to the image's visual features and uses Grad-CAM to highlight the regions that drove the model's real-vs-AI-generated decision.
+          Instead of relying on manual inspection, ImageGuard applies a transfer-learned EfficientNetB0 CNN to the image's visual features and uses Grad-CAM to highlight the regions that drove the model's real-vs-AI-generated decision.
         </p>
 </div>
 </div>
@@ -1570,7 +1570,7 @@ END-->
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
 <div class="flex items-center gap-2 text-[#5c5650]">
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shield" aria-hidden="true" class="lucide lucide-shield w-4 h-4 text-rose-600"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path></svg>
-<span>Pixi - Machine Learning-Based Image Authenticity Detection © 2026.</span>
+<span>ImageGuard - Machine Learning-Based Image Authenticity Detection © 2026.</span>
 </div>
 <div class="flex items-center space-x-6">
 <span class="hover:text-[#1f242c] transition-colors">20,000 Test Images Evaluated</span>
@@ -1720,7 +1720,7 @@ async function runAnalysis(file){
   catch(err){
     clearInterval(cycle);
     if(btn) btn.disabled=false;
-    console.error('Pixi backend error:', err);
+    console.error('ImageGuard backend error:', err);
     showUploadError(err && err.name === 'AbortError' ? 'ANALYSIS TIMED OUT' : 'BACKEND UNAVAILABLE');
     if(status) status.textContent = 'ANALYSIS FAILED';
     return;
