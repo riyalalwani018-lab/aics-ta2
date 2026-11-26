@@ -140,7 +140,7 @@ def make_gradcam_overlay(original: Image.Image, cam: np.ndarray) -> str:
     overlay = 0.55 * base + 0.45 * heat
     overlay = np.clip(overlay, 0, 255).astype(np.uint8)
 
-    image = Image.fromarray(overlay, mode="RGB")
+    image = Image.fromarray(overlay)
     buffer = io.BytesIO()
     image.save(buffer, format="JPEG", quality=90)
     encoded = base64.b64encode(buffer.getvalue()).decode("ascii")
@@ -166,7 +166,7 @@ def health():
 @app.get("/api/metrics")
 def metrics():
     try:
-        metrics_path = Path(__file__).parent / "performance_metrics.json"
+        metrics_path = Path(__file__).parent.parent / "data" / "pixi_model_performance.json"
 
         if not metrics_path.exists():
             return jsonify({
@@ -284,6 +284,15 @@ def analyze():
 
 if __name__ == "__main__":
     load_imageguard_model()
+
+    # Warm up TensorFlow and Grad-CAM before accepting requests.
+    dummy_image = np.zeros(
+        (1, IMAGE_SIZE[0], IMAGE_SIZE[1], 3),
+        dtype=np.float32
+    )
+    predict(dummy_image)
+    make_gradcam(dummy_image)
+
     print("ImageGuard backend running at http://127.0.0.1:5000")
     print("Health check: http://127.0.0.1:5000/api/health")
     app.run(host="127.0.0.1", port=5000, debug=False)

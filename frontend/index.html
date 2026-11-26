@@ -439,15 +439,15 @@
 </div>
 <!-- Navigation Tabs -->
 <nav class="flex items-center space-x-1 sm:space-x-2 font-mono text-xs">
-<button class="nav-tab-btn px-3 py-2 rounded-lg text-[#1f242c] bg-white border border-[#ded5c5] shadow-xs text-xs flex items-center gap-1.5 transition-colors font-medium" id="nav-btn-analyzer" onclick="switchTab('analyzer')">
+<button type="button" class="nav-tab-btn px-3 py-2 rounded-lg text-[#1f242c] bg-white border border-[#ded5c5] shadow-xs text-xs flex items-center gap-1.5 transition-colors font-medium" id="nav-btn-analyzer" onclick="switchTab('analyzer')">
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="crosshair" aria-hidden="true" class="lucide lucide-crosshair w-3.5 h-3.5 text-rose-600"><circle cx="12" cy="12" r="10"></circle><line x1="22" x2="18" y1="12" y2="12"></line><line x1="6" x2="2" y1="12" y2="12"></line><line x1="12" x2="12" y1="6" y2="2"></line><line x1="12" x2="12" y1="22" y2="18"></line></svg>
 <span>Image Analyzer</span>
 </button>
-<button class="nav-tab-btn px-3 py-2 rounded-lg text-[#5c5650] hover:text-[#1f242c] hover:bg-white/80 transition-colors text-xs flex items-center gap-1.5" id="nav-btn-performance" onclick="switchTab('performance')">
+<button type="button" class="nav-tab-btn px-3 py-2 rounded-lg text-[#5c5650] hover:text-[#1f242c] hover:bg-white/80 transition-colors text-xs flex items-center gap-1.5" id="nav-btn-performance" onclick="switchTab('performance')">
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="bar-chart-3" aria-hidden="true" class="lucide lucide-bar-chart-3 w-3.5 h-3.5 text-sky-700"><path d="M3 3v16a2 2 0 0 0 2 2h16"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg>
 <span class="hidden sm:inline">Model</span> Performance
         </button>
-<button class="nav-tab-btn px-3 py-2 rounded-lg text-[#5c5650] hover:text-[#1f242c] hover:bg-white/80 transition-colors text-xs flex items-center gap-1.5" id="nav-btn-pipeline" onclick="switchTab('pipeline')">
+<button type="button" class="nav-tab-btn px-3 py-2 rounded-lg text-[#5c5650] hover:text-[#1f242c] hover:bg-white/80 transition-colors text-xs flex items-center gap-1.5" id="nav-btn-pipeline" onclick="switchTab('pipeline')">
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="workflow" aria-hidden="true" class="lucide lucide-workflow w-3.5 h-3.5 text-emerald-700"><rect width="8" height="8" x="3" y="3" rx="2"></rect><path d="M7 11v4a2 2 0 0 0 2 2h4"></path><rect width="8" height="8" x="13" y="13" rx="2"></rect></svg>
 <span>About &amp; Pipeline</span>
 </button>
@@ -458,7 +458,7 @@
 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-500 opacity-75"></span>
 <span class="relative inline-flex rounded-full h-2 w-2 bg-teal-600"></span>
 </span>
-<span>CIFAKE Dataset: <span class="text-teal-700 font-bold">120,000 Images</span></span>
+<span>GenImage + OpenFake: <span class="text-teal-700 font-bold">10,000 Images</span></span>
 </div>
 </div>
 </header>
@@ -911,21 +911,21 @@
 <div class="border-b border-[#e6dfd3] pb-5">
 <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-teal-800 font-bold">
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="database" aria-hidden="true" class="lucide lucide-database w-4 h-4"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5V19A9 3 0 0 0 21 19V5"></path><path d="M3 12A9 3 0 0 0 21 12"></path></svg>
-<span>Evaluation Benchmarks • CIFAKE Dataset • 120,000 Images</span>
+<span>Evaluation Benchmarks • Three-Phase Dataset Evaluation</span>
 </div>
 <h2 class="text-3xl font-extrabold text-[#1f242c] tracking-tight mt-1">
         Image Classifier Benchmarks &amp; Model Performance
       </h2>
 <p class="text-[#5c5650] text-sm mt-1 max-w-3xl">
-        Comparative evaluation of deep-learning classifiers trained on the CIFAKE dataset of real and AI-generated synthetic images. EfficientNetB0 is the planned deployment architecture for binary image authenticity classification.
+        Comparative evaluation of EfficientNetB0 across three training phases: Dataset X, Dataset Y, and the combined Dataset X + Dataset Y. The model with the highest held-out test accuracy is selected for deployment.
       </p>
 </div>
 <!-- 4 Stat Badges -->
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
 <div class="p-5 rounded-2xl bg-white border border-[#e6dfd3] shadow-xs">
 <div class="text-xs font-mono text-[#8b8377] font-semibold">DATASET SAMPLE</div>
-<div id="performance-dataset-sample" class="text-2xl sm:text-3xl font-black font-mono text-[#1f242c] mt-1">120,000</div>
-<div id="performance-dataset-label" class="text-[11px] text-teal-700 font-mono mt-0.5">120,000 total images</div>
+<div id="performance-dataset-sample" class="text-2xl sm:text-3xl font-black font-mono text-[#1f242c] mt-1">—</div>
+<div id="performance-dataset-label" class="text-[11px] text-teal-700 font-mono mt-0.5">Loading...</div>
 </div>
 <div class="p-5 rounded-2xl bg-white border border-[#e6dfd3] shadow-xs">
 <div class="text-xs font-mono text-[#8b8377] font-semibold">BEST MODEL ACCURACY</div>
@@ -950,7 +950,7 @@
 <div class="flex items-center justify-between">
 <span class="text-sm font-bold font-mono text-[#1f242c] flex items-center gap-2">
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="grid" aria-hidden="true" class="lucide lucide-grid w-4 h-4 text-teal-700"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M3 9h18"></path><path d="M3 15h18"></path><path d="M9 3v18"></path><path d="M15 3v18"></path></svg>
-            Confusion Matrix (CIFAKE Test Split)
+            Confusion Matrix (Winning Model Test Split)
           </span>
 <span class="text-[11px] font-mono text-[#8b8377]">Image Model</span>
 </div>
@@ -1020,7 +1020,9 @@
 <text x="16" y="112" text-anchor="middle" font-family="ui-monospace, monospace" font-size="10" fill="#5c5650" transform="rotate(-90 16 112)">True Positive Rate</text>
 </svg>
 </div>
-<p class="text-[11px] text-[#5c5650] font-sans">The ROC curve plots the trade-off between the true-positive and false-positive rates across decision thresholds. Generated from the trained model's 20,000-image CIFAKE test evaluation.</p>
+<p class="text-[11px] text-[#5c5650] font-sans">
+  The ROC curve plots the trade-off between the true-positive and false-positive rates across decision thresholds for the winning model's held-out test evaluation.
+</p>
 </div>
 </div>
 <!-- Training & Validation Curves -->
@@ -1100,15 +1102,15 @@
         <text x="32" y="20" text-anchor="end">1</text>
 
         <text x="36" y="162" text-anchor="middle">1</text>
-        <text x="152" y="162" text-anchor="middle">8</text>
-        <text x="268" y="162" text-anchor="middle">16</text>
+        <text x="140" y="162" text-anchor="middle">10</text>
+        <text x="268" y="162" text-anchor="middle">22</text>
       </g>
 
       <!-- Stage 2 boundary -->
       <line
-        x1="152"
+        x1="140"
         y1="16"
-        x2="152"
+        x2="140"
         y2="148"
         stroke="#b45309"
         stroke-width="1"
@@ -1210,20 +1212,20 @@
         font-size="8"
         fill="#8b8377"
       >
-        <text x="32" y="20" text-anchor="end">0.30</text>
-        <text x="32" y="85" text-anchor="end">0.15</text>
+        <text x="32" y="20" text-anchor="end">0.60</text>
+        <text x="32" y="85" text-anchor="end">0.30</text>
         <text x="32" y="152" text-anchor="end">0</text>
 
         <text x="36" y="162" text-anchor="middle">1</text>
-        <text x="152" y="162" text-anchor="middle">8</text>
-        <text x="268" y="162" text-anchor="middle">16</text>
+        <text x="140" y="162" text-anchor="middle">10</text>
+        <text x="268" y="162" text-anchor="middle">22</text>
       </g>
 
       <!-- Stage 2 boundary -->
       <line
-        x1="152"
+        x1="140"
         y1="16"
-        x2="152"
+        x2="140"
         y2="148"
         stroke="#b45309"
         stroke-width="1"
@@ -1267,8 +1269,8 @@
   </div>
 
 </div>
-<p class="text-[11px] text-[#5c5650] font-sans">
-  Training and validation accuracy and loss across 16 epochs of CIFAKE model training. Stage 1 trains the classifier head, followed by Stage 2 fine-tuning of the EfficientNetB0 backbone.
+<p id="training-curves-description" class="text-[11px] text-[#5c5650] font-sans">
+  Training and validation accuracy and loss across 22 epochs of Phase 3 training on the combined Dataset X + Dataset Y. Stage 1 trains the classifier head, followed by Stage 2 fine-tuning of the EfficientNetB0 backbone.
 </p>
 </div>
 <!-- Selected Model Architecture -->
@@ -1282,9 +1284,8 @@
 
   <div class="px-6 py-4 border-b border-[#ede7dc] bg-[#fdfbf8]">
     <p class="text-[11px] text-[#5c5650] font-sans leading-relaxed">
-      ImageGuard uses EfficientNetB0 with transfer learning for REAL vs AI-GENERATED image classification.
-      The model was trained on CIFAKE and evaluated on 20,000 held-out test images.
-    </p>
+  ImageGuard uses EfficientNetB0 with transfer learning for REAL vs AI-GENERATED image classification. The final deployed model is automatically selected from the three experimental phases based on the highest held-out test accuracy.
+</p>
   </div>
 
   <div class="overflow-x-auto">
@@ -1301,58 +1302,11 @@
         </tr>
       </thead>
 
-      <tbody class="divide-y divide-[#ede7dc]">
-
-        <tr class="bg-rose-50/50 font-semibold">
-
-          <td class="py-3.5 px-6 flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-rose-600"></span>
-
-            <span>EfficientNetB0 (Transfer Learning)</span>
-
-            <span class="text-[9px] px-1.5 py-0.2 rounded bg-rose-700 text-white font-bold">
-              DEPLOYED
-            </span>
-          </td>
-
-          <td
-            id="architecture-accuracy"
-            class="py-3.5 px-6 text-emerald-800 font-bold"
-          >
-            —
-          </td>
-
-          <td
-            id="architecture-precision"
-            class="py-3.5 px-6"
-          >
-            —
-          </td>
-
-          <td
-            id="architecture-recall"
-            class="py-3.5 px-6"
-          >
-            —
-          </td>
-
-          <td
-            id="architecture-f1"
-            class="py-3.5 px-6 text-rose-700 font-bold"
-          >
-            —
-          </td>
-
-          <td
-            id="architecture-latency"
-            class="py-3.5 px-6 text-right text-teal-800 font-bold"
-          >
-            —
-          </td>
-
-        </tr>
-
-      </tbody>
+      <tbody
+  id="architecture-comparison-body"
+  class="divide-y divide-[#ede7dc]"
+>
+</tbody>
 
     </table>
   </div>
@@ -1465,13 +1419,15 @@ END-->
         AI-Generated Image Detection Using Deep Learning
       </h2>
 <p class="text-[#5c5650] text-sm mt-1 max-w-3xl">
-        ImageGuard uses deep learning and computer vision to classify images as real or AI-generated. Trained on the CIFAKE dataset of real and AI-generated synthetic images, it supports digital media authenticity and cybersecurity analysis.
+        ImageGuard uses deep learning and computer vision to classify images as real or AI-generated. The model was developed through a three-phase training experiment using GenImage and OpenFake datasets, with the highest-performing model selected for deployment.
       </p>
 </div>
+
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
 <div class="p-6 rounded-3xl bg-white border border-[#e6dfd3] space-y-3 shadow-xs">
 <div class="flex items-center gap-2 text-rose-700 text-xs font-mono font-bold">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="alert-octagon" aria-hidden="true" class="lucide lucide-alert-octagon w-4 h-4"><path d="M12 16h.01"></path><path d="M12 8v4"></path><path d="M15.312 2a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586l-4.688-4.688A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2z"></path></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="alert-octagon" aria-hidden="true" class="lucide lucide-alert-octagon w-4 h-4"><path d="M12 16h.01"></path><path d="M12 8v4"></path><path d="M15.312 2a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586l-4.688-4.688A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2z"></path><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>
 <span>THE PROBLEM</span>
 </div>
 <h3 class="text-xl font-bold text-[#1f242c]">Synthetic Imagery &amp; Misinformation</h3>
@@ -1479,6 +1435,7 @@ END-->
           Generative models can now produce photorealistic synthetic images that are increasingly difficult to distinguish from authentic photographs. Such imagery can fuel misinformation, impersonation, and social-engineering campaigns, making automated authenticity detection an important defensive capability.
         </p>
 </div>
+
 <div class="p-6 rounded-3xl bg-white border border-[#e6dfd3] space-y-3 shadow-xs">
 <div class="flex items-center gap-2 text-emerald-700 text-xs font-mono font-bold">
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle-2" aria-hidden="true" class="lucide lucide-check-circle-2 w-4 h-4"><circle cx="12" cy="12" r="10"></circle><path d="m16 9-5.5 5.5L8 12"></path></svg>
@@ -1486,15 +1443,16 @@ END-->
 </div>
 <h3 class="text-xl font-bold text-[#1f242c]">Deep-Learning Visual Authenticity Classification</h3>
 <p class="text-[#5c5650] text-xs leading-relaxed">
-          Instead of relying on manual inspection, ImageGuard applies a transfer-learned EfficientNetB0 CNN to the image's visual features and uses Grad-CAM to highlight the regions that drove the model's real-vs-AI-generated decision.
+          Instead of relying on manual inspection, ImageGuard applies a transfer-learned EfficientNetB0 CNN to visual image features and uses Grad-CAM to highlight the regions that contributed to the model's real-vs-AI-generated decision.
         </p>
 </div>
+
 </div>
-<!-- 8-Step ML Pipeline -->
+
 <!-- Cybersecurity Relevance -->
 <div class="p-6 rounded-3xl bg-white border border-[#e6dfd3] space-y-3 shadow-xs">
 <div class="flex items-center gap-2 text-rose-700 text-xs font-mono font-bold">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shield-alert" aria-hidden="true" class="lucide lucide-shield-alert w-4 h-4"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" data-lucide="shield-alert" aria-hidden="true" class="lucide lucide-shield-alert w-4 h-4"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>
 <span>CYBERSECURITY RELEVANCE</span>
 </div>
 <h3 class="text-xl font-bold text-[#1f242c]">Why Detecting Synthetic Images Matters</h3>
@@ -1502,68 +1460,125 @@ END-->
           AI-generated media can be used for misinformation, impersonation, social engineering, fraudulent content, and the manipulation of digital information. Detecting synthetic imagery therefore contributes to digital media authenticity and cybersecurity investigations, helping analysts verify whether an image is genuine or machine-generated.
         </p>
 </div>
+
 <div class="p-6 rounded-3xl bg-white border border-[#e6dfd3] space-y-6 shadow-xs">
+
 <div>
 <h3 class="text-lg font-bold font-mono text-[#1f242c] flex items-center gap-2">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="cpu" aria-hidden="true" class="lucide lucide-cpu w-5 h-5 text-teal-700"><path d="M12 20v2"></path><path d="M12 2v2"></path><path d="M17 20v2"></path><path d="M17 2v2"></path><path d="M2 12h2"></path><path d="M2 17h2"></path><path d="M2 7h2"></path><path d="M20 12h2"></path><path d="M20 17h2"></path><path d="M20 7h2"></path><path d="M7 20v2"></path><path d="M7 2v2"></path><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="8" y="8" width="8" height="8" rx="1"></rect></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" data-lucide="cpu" aria-hidden="true" class="lucide lucide-cpu w-5 h-5 text-teal-700"><path d="M12 20v2"></path><path d="M12 2v2"></path><path d="M17 20v2"></path><path d="M17 2v2"></path><path d="M2 12h2"></path><path d="M2 17h2"></path><path d="M2 7h2"></path><path d="M20 12h2"></path><path d="M20 17h2"></path><path d="M20 7h2"></path><path d="M7 20v2"></path><path d="M7 2v2"></path><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="8" y="8" width="8" height="8" rx="1"></rect></svg>
 <span>8-Step Image Authenticity Pipeline</span>
 </h3>
 <p class="text-xs text-[#5c5650] font-mono mt-0.5">End-to-end image ingestion, preprocessing, CNN inference, and Grad-CAM explainability</p>
 </div>
+
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs font-mono">
+
 <div class="p-4 rounded-2xl bg-[#faf7f2] border border-[#ded5c5] space-y-2">
 <div class="text-[10px] text-teal-800 font-bold">STEP 01</div>
 <div class="font-bold text-[#1f242c]">Image Upload &amp; Validation</div>
 <p class="text-[11px] text-[#5c5650] font-sans">Validate the uploaded format (JPG, JPEG, PNG, WEBP) and load the image into the analysis pipeline.</p>
 </div>
+
 <div class="p-4 rounded-2xl bg-[#faf7f2] border border-[#ded5c5] space-y-2">
 <div class="text-[10px] text-teal-800 font-bold">STEP 02</div>
 <div class="font-bold text-[#1f242c]">Image Preprocessing</div>
-<p class="text-[11px] text-[#5c5650] font-sans">Resize the image to 224×224, convert it to RGB, and prepare it for EfficientNetB0 inference.</p>
+<p class="text-[11px] text-[#5c5650] font-sans">Resize the image to 260×260, convert it to RGB, and prepare it for EfficientNetB0 inference.</p>
 </div>
+
 <div class="p-4 rounded-2xl bg-[#faf7f2] border border-[#ded5c5] space-y-2">
 <div class="text-[10px] text-teal-800 font-bold">STEP 03</div>
 <div class="font-bold text-[#1f242c]">CNN Feature Extraction</div>
-<p class="text-[11px] text-[#5c5650] font-sans">Convolutional layers extract hierarchical visual features from pixel patterns and textures.</p>
+<p class="text-[11px] text-[#5c5650] font-sans">Convolutional layers extract hierarchical visual features from pixel patterns, textures, and image structures.</p>
 </div>
+
 <div class="p-4 rounded-2xl bg-[#faf7f2] border border-[#ded5c5] space-y-2">
 <div class="text-[10px] text-teal-800 font-bold">STEP 04</div>
 <div class="font-bold text-[#1f242c]">Transfer-Learning Inference</div>
-<p class="text-[11px] text-[#5c5650] font-sans">The EfficientNetB backbone produces a real-vs-AI-generated probability.</p>
+<p class="text-[11px] text-[#5c5650] font-sans">The EfficientNetB0 backbone produces a real-vs-AI-generated probability using the trained binary classifier.</p>
 </div>
+
 <div class="p-4 rounded-2xl bg-[#faf7f2] border border-[#ded5c5] space-y-2">
 <div class="text-[10px] text-rose-700 font-bold">STEP 05</div>
 <div class="font-bold text-[#1f242c]">Binary Classification</div>
-<p class="text-[11px] text-[#5c5650] font-sans">A sigmoid output yields REAL or AI-GENERATED together with a confidence score.</p>
+<p class="text-[11px] text-[#5c5650] font-sans">A sigmoid output produces the probability used to classify the image as REAL or AI-GENERATED.</p>
 </div>
+
 <div class="p-4 rounded-2xl bg-[#faf7f2] border border-[#ded5c5] space-y-2">
 <div class="text-[10px] text-rose-700 font-bold">STEP 06</div>
 <div class="font-bold text-[#1f242c]">Grad-CAM Explainability</div>
-<p class="text-[11px] text-[#5c5650] font-sans">A class-activation heatmap is generated to highlight the decisive image regions.</p>
+<p class="text-[11px] text-[#5c5650] font-sans">A class-activation heatmap is generated to highlight the image regions that contributed to the model's decision.</p>
 </div>
+
 <div class="p-4 rounded-2xl bg-[#faf7f2] border border-[#ded5c5] space-y-2">
 <div class="text-[10px] text-rose-700 font-bold">STEP 07</div>
 <div class="font-bold text-[#1f242c]">Result Aggregation</div>
-<p class="text-[11px] text-[#5c5650] font-sans">Prediction, confidence, model information, and the heatmap are bundled into the API response.</p>
+<p class="text-[11px] text-[#5c5650] font-sans">Prediction, confidence, model information, processing time, and the explainability output are bundled into the API response.</p>
 </div>
+
 <div class="p-4 rounded-2xl bg-[#faf7f2] border border-[#ded5c5] space-y-2">
 <div class="text-[10px] text-rose-700 font-bold">STEP 08</div>
 <div class="font-bold text-[#1f242c]">Frontend Visualization</div>
-<p class="text-[11px] text-[#5c5650] font-sans">The frontend renders the prediction, confidence, image characteristics, and the Grad-CAM overlay.</p>
+<p class="text-[11px] text-[#5c5650] font-sans">The frontend renders the prediction, confidence, image characteristics, and Grad-CAM visualization.</p>
+</div>
+
 </div>
 </div>
+
+<!-- Training & Model Selection -->
+<div class="p-6 rounded-3xl bg-white border border-[#e6dfd3] space-y-6 shadow-xs">
+
+<div>
+<h3 class="text-lg font-bold font-mono text-[#1f242c] flex items-center gap-2">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" data-lucide="layers" aria-hidden="true" class="lucide lucide-layers w-5 h-5 text-teal-700"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+<span>Three-Phase Model Training &amp; Selection</span>
+</h3>
+<p class="text-xs text-[#5c5650] font-mono mt-0.5">Independent dataset experiments followed by held-out test comparison</p>
 </div>
+
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
+
+<div class="p-4 rounded-2xl bg-[#faf7f2] border border-[#ded5c5] space-y-2">
+<div class="text-[10px] text-teal-800 font-bold">PHASE 01</div>
+<div class="font-bold text-[#1f242c]">Dataset X — GenImage</div>
+<p class="text-[11px] text-[#5c5650] font-sans">EfficientNetB0 was trained and evaluated using 2,500 REAL and 2,500 AI-GENERATED images from Dataset X.</p>
+</div>
+
+<div class="p-4 rounded-2xl bg-[#faf7f2] border border-[#ded5c5] space-y-2">
+<div class="text-[10px] text-teal-800 font-bold">PHASE 02</div>
+<div class="font-bold text-[#1f242c]">Dataset Y — OpenFake</div>
+<p class="text-[11px] text-[#5c5650] font-sans">A fresh EfficientNetB0 model was trained and evaluated using 2,500 REAL and 2,500 AI-GENERATED images from OpenFake Core v2.0.</p>
+</div>
+
+<div class="p-4 rounded-2xl bg-[#faf7f2] border border-[#ded5c5] space-y-2">
+<div class="text-[10px] text-rose-700 font-bold">PHASE 03</div>
+<div class="font-bold text-[#1f242c]">Combined Dataset X + Y</div>
+<p class="text-[11px] text-[#5c5650] font-sans">The separated training and validation splits from both datasets were combined and used to train the final experimental model.</p>
+</div>
+
+</div>
+
+<div class="p-4 rounded-2xl bg-[#faf7f2] border border-[#ded5c5]">
+<p class="text-[11px] text-[#5c5650] font-sans leading-relaxed">
+<strong class="text-[#1f242c]">Model selection:</strong>
+All three phases were compared using their held-out test accuracy. The model with the highest test accuracy was selected automatically as the deployed ImageGuard model.
+</p>
+</div>
+
+</div>
+
 <!-- Tech Stack -->
 <div class="p-6 rounded-3xl bg-white border border-[#e6dfd3] flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
 <div class="space-y-1.5">
 <h4 class="text-sm font-bold font-mono text-[#1f242c]">Technology Stack</h4>
 <p class="text-xs text-[#5c5650] font-mono"><span class="text-teal-800 font-bold">Frontend:</span> HTML · CSS · JavaScript · Tailwind CSS</p>
 <p class="text-xs text-[#5c5650] font-mono"><span class="text-teal-800 font-bold">Backend:</span> Python · Flask</p>
-<p class="text-xs text-[#5c5650] font-mono"><span class="text-teal-800 font-bold">Machine Learning:</span> Machine Learning: EfficientNetB0 · Transfer Learning · Fine-Tuning</p>
+<p class="text-xs text-[#5c5650] font-mono"><span class="text-teal-800 font-bold">Machine Learning:</span> EfficientNetB0 · Transfer Learning · Fine-Tuning</p>
 <p class="text-xs text-[#5c5650] font-mono"><span class="text-teal-800 font-bold">Explainability:</span> Grad-CAM</p>
-<p class="text-xs text-[#5c5650] font-mono"><span class="text-teal-800 font-bold">Dataset:</span> CIFAKE - Real and AI-Generated Images</p>
+<p class="text-xs text-[#5c5650] font-mono"><span class="text-teal-800 font-bold">Datasets:</span> GenImage · OpenFake Core v2.0</p>
+<p class="text-xs text-[#5c5650] font-mono"><span class="text-teal-800 font-bold">Image Input:</span> 260×260 RGB</p>
 </div>
 </div>
+
 </main>
 <!-- ================= FOOTER ================= -->
 <footer class="border-t border-[#ded5c5] bg-[#f7f4ee] py-8 text-[#6e675f] text-xs font-mono">
@@ -1573,8 +1588,8 @@ END-->
 <span>ImageGuard - Machine Learning-Based Image Authenticity Detection © 2026.</span>
 </div>
 <div class="flex items-center space-x-6">
-<span class="hover:text-[#1f242c] transition-colors">20,000 Test Images Evaluated</span>
-<span class="hover:text-[#1f242c] transition-colors">CIFAKE Dataset</span>
+<span class="hover:text-[#1f242c] transition-colors">2,002 Test Images Evaluated</span>
+<span class="hover:text-[#1f242c] transition-colors">GenImage + OpenFake</span>
 <span class="hover:text-[#1f242c] transition-colors">Grad-CAM Explainability</span>
 </div>
 </div>
@@ -1613,18 +1628,67 @@ function hashStr(s){ let h=0; for(let i=0;i<s.length;i++){ h=(h*31+s.charCodeAt(
 function acceptedType(t){ return ['image/jpeg','image/jpg','image/png','image/webp'].includes(t); }
 
 /* ---------- tab switcher ---------- */
-function switchTab(tabKey){
-  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('.nav-tab-btn').forEach(btn => {
-    btn.classList.remove('border','border-[#ded5c5]','bg-white','text-[#1f242c]','shadow-xs','font-medium');
-    btn.classList.add('text-[#5c5650]');
-  });
-  const sec = $('tab-'+tabKey), btn = $('nav-btn-'+tabKey);
-  if (sec) sec.classList.add('active');
-  if (btn){ btn.classList.add('bg-white','text-[#1f242c]','border','border-[#ded5c5]','shadow-xs','font-medium'); btn.classList.remove('text-[#5c5650]'); }
-  window.scrollTo({ top:0, behavior:'smooth' });
-}
+function switchTab(tabKey) {
+  const sections = document.querySelectorAll('.tab-content');
+  const buttons = document.querySelectorAll('.nav-tab-btn');
 
+  // Hide every tab explicitly
+  sections.forEach(section => {
+    section.classList.remove('active');
+    section.style.setProperty('display', 'none', 'important');
+  });
+
+  // Reset every navigation button
+  buttons.forEach(button => {
+    button.classList.remove(
+      'border',
+      'border-[#ded5c5]',
+      'bg-white',
+      'text-[#1f242c]',
+      'shadow-xs',
+      'font-medium'
+    );
+
+    button.classList.add('text-[#5c5650]');
+  });
+
+  // Find selected tab
+  const section = document.getElementById('tab-' + tabKey);
+  const button = document.getElementById('nav-btn-' + tabKey);
+
+  if (!section) {
+    console.error('Tab section not found:', 'tab-' + tabKey);
+    return;
+  }
+
+  // Show ONLY the selected tab
+  section.classList.add('active');
+  section.style.setProperty('display', 'block', 'important');
+
+  // Highlight ONLY the selected navigation button
+  if (button) {
+    button.classList.add(
+      'bg-white',
+      'text-[#1f242c]',
+      'border',
+      'border-[#ded5c5]',
+      'shadow-xs',
+      'font-medium'
+    );
+
+    button.classList.remove('text-[#5c5650]');
+  }
+
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+
+  if (tabKey === 'performance') {
+  loadPerformanceMetrics();
+  loadTrainingHistory();
+}
+}
 /* ---------- upload wiring ---------- */
 function initUpload(){
   // Upload is handled directly by the hero panel.
@@ -1657,7 +1721,7 @@ function clearImage(){
   currentFile = null;
   currentImageMeta = null;
   const input = $('imageInput'); if (input) input.value = '';
-  const name = $('heroFileName'); if (name) name.textContent = 'Choose an image to analyze(32x32)';
+  const name = $('heroFileName'); if (name) name.textContent = 'Choose an image to analyze';
   const status = $('heroStatusText'); if (status) status.textContent = 'READY TO ANALYZE';
 }
 
@@ -1783,13 +1847,16 @@ function renderResult(result, file){
 
   const vb=$('verdictBadge'), vt=$('verdictTitle');
   if (vb && vt){
-    if (isAigen){
+    if (isAigen && conf > 65){
       vb.className="self-start md:self-auto px-5 py-2.5 rounded-2xl bg-rose-50 text-rose-800 border border-rose-300 shadow-xs flex items-center gap-2.5 font-mono text-xs font-bold uppercase tracking-wider";
       vt.textContent = 'AI-GENERATED • '+conf.toFixed(1)+'% Confidence';
-    } else {
-      vb.className="self-start md:self-auto px-5 py-2.5 rounded-2xl bg-emerald-50 text-emerald-800 border border-emerald-300 shadow-xs flex items-center gap-2.5 font-mono text-xs font-bold uppercase tracking-wider";
-      vt.textContent = 'REAL • '+conf.toFixed(1)+'% Confidence';
-    }
+    } else if (!isAigen && conf > 65) {
+  vb.className="self-start md:self-auto px-5 py-2.5 rounded-2xl bg-emerald-50 text-emerald-800 border border-emerald-300 shadow-xs flex items-center gap-2.5 font-mono text-xs font-bold uppercase tracking-wider";
+  vt.textContent = 'REAL • '+conf.toFixed(1)+'% Confidence';
+} else {
+  vb.className="self-start md:self-auto px-5 py-2.5 rounded-2xl bg-amber-50 text-amber-800 border border-amber-300 shadow-xs flex items-center gap-2.5 font-mono text-xs font-bold uppercase tracking-wider";
+  vt.textContent = 'SUSPICIOUS • '+conf.toFixed(1)+'% Confidence';
+}
   }
 
   const realPct = isAigen ? other : conf;
@@ -1801,7 +1868,10 @@ function renderResult(result, file){
   if ($('distLegitLabel')) $('distLegitLabel').textContent = 'Real: '+realPct.toFixed(1)+'%';
   if ($('distPhishLabel')) $('distPhishLabel').textContent = 'AI-Generated: '+aigPct.toFixed(1)+'%';
 
-  setCompanionState(isAigen ? 'aigen' : 'real', conf);
+  setCompanionState(
+  conf > 65 ? (isAigen ? 'aigen' : 'real') : 'suspicious',
+  conf
+);
   if (currentImageMeta) renderCharacteristics(currentImageMeta);
 
   const setD=(id,v)=>{ const e=$(id); if(e) e.textContent=v; };
@@ -1960,7 +2030,7 @@ function setTitle(t){
 function initHeroUpload(){
   const input=$('imageInput'), name=$('heroFileName'), btn=$('heroAnalyzeImage'), status=$('heroStatusText'), hero=$('heroUpload');
   if(!input || !hero) return;
-  const sync=()=>{ if(name) name.textContent=currentFile ? currentFile.name : 'Choose an image to analyze(32x32)'; };
+  const sync=()=>{ if(name) name.textContent=currentFile ? currentFile.name : 'Choose an image to analyze'; };
   input.addEventListener('change',()=>{
     if(input.files && input.files[0]) handleFile(input.files[0]);
     sync();
@@ -1998,17 +2068,78 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
 async function loadPerformanceMetrics() {
   try {
-    const response = await fetch("http://127.0.0.1:5000/api/metrics");
+    const response = await fetch(
+      "http://127.0.0.1:5000/api/metrics"
+    );
 
     if (!response.ok) {
       throw new Error(`Metrics API returned ${response.status}`);
     }
 
-    const metrics = await response.json();
+    const data = await response.json();
 
-    // ---------- Accuracy ----------
-    const accuracyElement = document.getElementById("performance-accuracy");
-    const accuracyLabel = document.getElementById("performance-accuracy-label");
+    // --------------------------------------------------
+    // MASTER JSON
+    // --------------------------------------------------
+
+    const phases = Object.values(data.phases || {});
+
+    if (!phases.length) {
+      throw new Error("No phase results found in master JSON.");
+    }
+
+    // Automatically select the phase with the highest
+    // test accuracy — this is the deployed model.
+    const winnerPhase = phases.reduce((best, phase) => {
+      return Number(phase.metrics.accuracy) >
+        Number(best.metrics.accuracy)
+        ? phase
+        : best;
+    });
+
+    const metrics = winnerPhase.metrics;
+    const dataset = winnerPhase.dataset;
+    const inference = winnerPhase.inference;
+    const confusionMatrix = winnerPhase.confusion_matrix;
+    const rocCurve = winnerPhase.roc_curve;
+
+    // --------------------------------------------------
+    // TOP STAT CARDS — WINNING MODEL
+    // --------------------------------------------------
+
+    const datasetSample =
+      document.getElementById("performance-dataset-sample");
+
+    const datasetLabel =
+      document.getElementById("performance-dataset-label");
+
+    const accuracyElement =
+      document.getElementById("performance-accuracy");
+
+    const accuracyLabel =
+      document.getElementById("performance-accuracy-label");
+
+    const rocAucElement =
+      document.getElementById("performance-roc-auc");
+
+    const rocAucLabel =
+      document.getElementById("performance-roc-auc-label");
+
+    const inferenceTimeElement =
+      document.getElementById("performance-inference-time");
+
+    const inferenceTimeLabel =
+      document.getElementById("performance-inference-time-label");
+
+    if (datasetSample) {
+      datasetSample.textContent =
+        Number(dataset.test_images).toLocaleString();
+    }
+
+    if (datasetLabel) {
+      datasetLabel.textContent =
+        `${Number(dataset.test_images).toLocaleString()} test images`;
+    }
 
     if (accuracyElement) {
       accuracyElement.textContent =
@@ -2017,12 +2148,8 @@ async function loadPerformanceMetrics() {
 
     if (accuracyLabel) {
       accuracyLabel.textContent =
-        "Test accuracy • 20,000 images";
+        `${winnerPhase.phase} • highest test accuracy`;
     }
-
-    // ---------- ROC-AUC ----------
-    const rocAucElement = document.getElementById("performance-roc-auc");
-    const rocAucLabel = document.getElementById("performance-roc-auc-label");
 
     if (rocAucElement) {
       rocAucElement.textContent =
@@ -2031,172 +2158,258 @@ async function loadPerformanceMetrics() {
 
     if (rocAucLabel) {
       rocAucLabel.textContent =
-        "Test ROC-AUC • 20,000 images";
+        `Test ROC-AUC • ${Number(dataset.test_images).toLocaleString()} images`;
     }
-
-    // ---------- Inference Time ----------
-    const inferenceTimeElement =
-      document.getElementById("performance-inference-time");
-
-    const inferenceTimeLabel =
-      document.getElementById("performance-inference-time-label");
 
     if (inferenceTimeElement) {
       inferenceTimeElement.textContent =
-        `${Number(metrics.inference.average_ms_per_image).toFixed(3)} ms`;
+        `${Number(inference.average_ms_per_image).toFixed(3)} ms`;
     }
 
     if (inferenceTimeLabel) {
       inferenceTimeLabel.textContent =
-        "Average per image • GPU benchmark";
+        "Average inference time per image";
     }
-    
-    // ---------- Confusion Matrix ----------
-const confusionMatrix = metrics.confusion_matrix;
 
-if (confusionMatrix && typeof confusionMatrix === "object") {
+    // --------------------------------------------------
+    // CONFUSION MATRIX — WINNING MODEL
+    // --------------------------------------------------
 
-  const truePositiveReal =
-    Number(confusionMatrix.true_real_pred_real);
+    if (
+      confusionMatrix &&
+      typeof confusionMatrix === "object"
+    ) {
 
-  const falseNegativeAiAsReal =
-    Number(confusionMatrix.true_ai_pred_real);
+      const truePositiveReal =
+  Number(confusionMatrix.true_real_pred_real);
 
-  const falsePositiveRealAsAi =
-    Number(confusionMatrix.true_real_pred_ai);
+const falseNegativeAiAsReal =
+  Number(confusionMatrix.true_ai_pred_real);
 
-  const trueNegativeAiGenerated =
-    Number(confusionMatrix.true_ai_pred_ai);
+const falsePositiveRealAsAi =
+  Number(confusionMatrix.true_real_pred_ai);
 
-  // True Positive
-  const tp = document.getElementById("performance-tp");
-  const tpLabel = document.getElementById("performance-tp-label");
+const trueNegativeAiGenerated =
+  Number(confusionMatrix.true_ai_pred_ai);
 
-  if (tp) {
-    tp.textContent = truePositiveReal.toLocaleString();
-  }
+      const tp =
+        document.getElementById("performance-tp");
 
-  if (tpLabel) {
-    tpLabel.textContent = "Correct REAL predictions";
-  }
+      const tpLabel =
+        document.getElementById("performance-tp-label");
 
-  // False Negative
-  const fn = document.getElementById("performance-fn");
-  const fnLabel = document.getElementById("performance-fn-label");
+      const fn =
+        document.getElementById("performance-fn");
 
-  if (fn) {
-    fn.textContent = falseNegativeAiAsReal.toLocaleString();
-  }
+      const fnLabel =
+        document.getElementById("performance-fn-label");
 
-  if (fnLabel) {
-    fnLabel.textContent = "AI images classified as REAL";
-  }
+      const fp =
+        document.getElementById("performance-fp");
 
-  // False Positive
-  const fp = document.getElementById("performance-fp");
-  const fpLabel = document.getElementById("performance-fp-label");
+      const fpLabel =
+        document.getElementById("performance-fp-label");
 
-  if (fp) {
-    fp.textContent = falsePositiveRealAsAi.toLocaleString();
-  }
+      const tn =
+        document.getElementById("performance-tn");
 
-  if (fpLabel) {
-    fpLabel.textContent = "REAL images classified as AI";
-  }
+      const tnLabel =
+        document.getElementById("performance-tn-label");
 
-  // True Negative
-  const tn = document.getElementById("performance-tn");
-  const tnLabel = document.getElementById("performance-tn-label");
+      if (tp) {
+        tp.textContent =
+          truePositiveReal.toLocaleString();
+      }
 
-  if (tn) {
-    tn.textContent = trueNegativeAiGenerated.toLocaleString();
-  }
+      if (tpLabel) {
+        tpLabel.textContent =
+          "Correct REAL predictions";
+      }
 
-  if (tnLabel) {
-    tnLabel.textContent = "Correct AI predictions";
-  }
+      if (fn) {
+        fn.textContent =
+          falseNegativeAiAsReal.toLocaleString();
+      }
+
+      if (fnLabel) {
+        fnLabel.textContent =
+          "AI images classified as REAL";
+      }
+
+      if (fp) {
+        fp.textContent =
+          falsePositiveRealAsAi.toLocaleString();
+      }
+
+      if (fpLabel) {
+        fpLabel.textContent =
+          "REAL images classified as AI";
+      }
+
+      if (tn) {
+        tn.textContent =
+          trueNegativeAiGenerated.toLocaleString();
+      }
+
+      if (tnLabel) {
+        tnLabel.textContent =
+          "Correct AI predictions";
+      }
+    }
+
+    // --------------------------------------------------
+    // ROC CURVE — WINNING MODEL
+    // --------------------------------------------------
+
+    const rocPath =
+      document.getElementById("performance-roc-path");
+
+    const rocAucChart =
+      document.getElementById("performance-roc-auc-chart");
+
+    const fpr = rocCurve?.fpr;
+    const tpr = rocCurve?.tpr;
+
+    if (
+      rocPath &&
+      Array.isArray(fpr) &&
+      Array.isArray(tpr) &&
+      fpr.length === tpr.length &&
+      fpr.length > 1
+    ) {
+
+      const chartLeft = 48;
+      const chartBottom = 200;
+      const chartWidth = 252;
+      const chartHeight = 176;
+
+      let pathData = "";
+
+      for (let i = 0; i < fpr.length; i++) {
+
+        const x =
+          chartLeft +
+          Number(fpr[i]) * chartWidth;
+
+        const y =
+          chartBottom -
+          Number(tpr[i]) * chartHeight;
+
+        pathData +=
+          `${i === 0 ? "M" : "L"} ` +
+          `${x.toFixed(2)} ${y.toFixed(2)} `;
+      }
+
+      rocPath.setAttribute(
+        "d",
+        pathData.trim()
+      );
+    }
+
+    if (rocAucChart) {
+      rocAucChart.textContent =
+        `AUC: ${(Number(metrics.auc) * 100).toFixed(2)}%`;
+    }
+
+    // --------------------------------------------------
+// ALL THREE MODEL / PHASE RESULTS TABLE
+// --------------------------------------------------
+
+const architectureTableBody =
+  document.getElementById("architecture-comparison-body");
+
+if (architectureTableBody) {
+
+  const phases = Object.values(data.phases || {});
+
+  const winnerPhase = phases.reduce(
+    (best, phase) =>
+      Number(phase.metrics.accuracy) >
+      Number(best.metrics.accuracy)
+        ? phase
+        : best
+  );
+
+  architectureTableBody.innerHTML = phases.map(phase => {
+
+    const isWinner =
+      phase.phase === winnerPhase.phase;
+
+    const phaseName = phase.phase
+      .replace("Phase 1 — Dataset X", "Phase 1 — Dataset X")
+      .replace(
+        "Phase 2 — Dataset Y",
+        "Phase 2 — Dataset Y"
+      )
+      .replace(
+        "Phase 3 — Combined Dataset X + Dataset Y",
+        "Phase 3 — Combined Dataset X + Dataset Y"
+      );
+
+    return `
+      <tr class="${isWinner ? 'bg-emerald-50/50 font-semibold' : ''}">
+
+  <td class="py-3.5 px-6 flex items-center gap-2">
+
+    <span class="w-2 h-2 rounded-full ${
+      isWinner
+        ? 'bg-emerald-600'
+        : 'bg-rose-600'
+    }"></span>
+
+    <span>${phaseName}</span>
+
+    ${
+      isWinner
+        ? `
+          <span class="text-[9px] px-1.5 py-0.2 rounded bg-emerald-700 text-white font-bold">
+            DEPLOYED
+          </span>
+        `
+        : ''
+    }
+
+  </td>
+
+        <td class="py-3.5 px-6 text-emerald-800 font-bold">
+          ${(Number(phase.metrics.accuracy) * 100).toFixed(2)}%
+        </td>
+
+        <td class="py-3.5 px-6">
+          ${(Number(phase.metrics.precision) * 100).toFixed(2)}%
+        </td>
+
+        <td class="py-3.5 px-6">
+          ${(Number(phase.metrics.recall) * 100).toFixed(2)}%
+        </td>
+
+        <td class="py-3.5 px-6 text-rose-700 font-bold">
+          ${(Number(phase.metrics.f1) * 100).toFixed(2)}%
+        </td>
+
+        <td class="py-3.5 px-6 text-right text-teal-800 font-bold">
+          ${Number(
+            phase.inference.average_ms_per_image
+          ).toFixed(3)} ms
+        </td>
+
+      </tr>
+    `;
+
+  }).join("");
 }
 
-// ---------- ROC Curve ----------
-const rocPath = document.getElementById("performance-roc-path");
-const rocAucChart = document.getElementById("performance-roc-auc-chart");
-
-const fpr = metrics.roc_curve.fpr;
-const tpr = metrics.roc_curve.tpr;
-
-if (
-  rocPath &&
-  Array.isArray(fpr) &&
-  Array.isArray(tpr) &&
-  fpr.length === tpr.length &&
-  fpr.length > 1
-) {
-  const chartLeft = 48;
-  const chartBottom = 200;
-  const chartWidth = 252;
-  const chartHeight = 176;
-
-  let pathData = "";
-
-  for (let i = 0; i < fpr.length; i++) {
-    const x = chartLeft + (Number(fpr[i]) * chartWidth);
-    const y = chartBottom - (Number(tpr[i]) * chartHeight);
-
-    pathData +=
-      `${i === 0 ? "M" : "L"} ${x.toFixed(2)} ${y.toFixed(2)} `;
-  }
-
-  rocPath.setAttribute("d", pathData.trim());
-}
-
-if (rocAucChart) {
-  rocAucChart.textContent =
-    `AUC: ${(Number(metrics.auc) * 100).toFixed(2)}%`;
-}
-
-    // Selected Model Architecture
-    const architectureAccuracy =
-      document.getElementById("architecture-accuracy");
-
-    const architecturePrecision =
-      document.getElementById("architecture-precision");
-
-    const architectureRecall =
-      document.getElementById("architecture-recall");
-
-    const architectureF1 =
-      document.getElementById("architecture-f1");
-
-    const architectureLatency =
-      document.getElementById("architecture-latency");
-
-    if (architectureAccuracy) {
-      architectureAccuracy.textContent =
-        `${(Number(metrics.accuracy) * 100).toFixed(2)}%`;
-    }
-
-    if (architecturePrecision) {
-      architecturePrecision.textContent =
-        `${(Number(metrics.precision) * 100).toFixed(2)}%`;
-    }
-
-    if (architectureRecall) {
-      architectureRecall.textContent =
-        `${(Number(metrics.recall) * 100).toFixed(2)}%`;
-    }
-
-    if (architectureF1) {
-      architectureF1.textContent =
-        `${(Number(metrics.f1) * 100).toFixed(2)}%`;
-    }
-
-    if (architectureLatency) {
-      architectureLatency.textContent =
-        `${Number(metrics.inference.average_ms_per_image).toFixed(3)} ms`;
-    }
+    console.log(
+      "Winning phase:",
+      winnerPhase.phase
+    );
 
   } catch (error) {
-    console.error("Failed to load performance metrics:", error);
+
+    console.error(
+      "Failed to load performance metrics:",
+      error
+    );
 
     const accuracyElement =
       document.getElementById("performance-accuracy");
@@ -2209,26 +2422,59 @@ if (rocAucChart) {
     }
 
     if (accuracyLabel) {
-      accuracyLabel.textContent = "Metrics unavailable";
+      accuracyLabel.textContent =
+        "Metrics unavailable";
     }
   }
 }
-loadPerformanceMetrics();
 
 // ---------- Training & Validation Curves ----------
 async function loadTrainingHistory() {
   try {
     const response = await fetch(
-      "http://127.0.0.1:5000/api/training-history"
+      "http://127.0.0.1:5000/api/metrics"
     );
 
     if (!response.ok) {
       throw new Error(
-        `Training history API returned ${response.status}`
+        `Metrics API returned ${response.status}`
       );
     }
 
-    const history = await response.json();
+    const data = await response.json();
+
+    // --------------------------------------------------
+    // Automatically select the highest-accuracy phase
+    // --------------------------------------------------
+
+    const phases = Object.values(data.phases || {});
+
+    if (!phases.length) {
+      throw new Error(
+        "No phase results found in master JSON."
+      );
+    }
+
+    const winnerPhase = phases.reduce(
+      (best, phase) =>
+        Number(phase.metrics.accuracy) >
+        Number(best.metrics.accuracy)
+          ? phase
+          : best
+    );
+
+    // --------------------------------------------------
+    // Training history of winning model
+    // --------------------------------------------------
+
+    const history =
+      winnerPhase.training?.history;
+
+    if (!history) {
+      throw new Error(
+        `Training history unavailable for ${winnerPhase.phase}`
+      );
+    }
 
     const epochs = history.epochs;
     const accuracy = history.accuracy;
@@ -2243,27 +2489,56 @@ async function loadTrainingHistory() {
       !Array.isArray(loss) ||
       !Array.isArray(valLoss)
     ) {
-      throw new Error("Invalid training history format");
+      throw new Error(
+        "Invalid training history format"
+      );
     }
 
+    // --------------------------------------------------
     // Chart dimensions
+    // --------------------------------------------------
+
     const chartLeft = 36;
     const chartRight = 268;
     const chartTop = 16;
     const chartBottom = 148;
 
-    const chartWidth = chartRight - chartLeft;
-    const chartHeight = chartBottom - chartTop;
+    const chartWidth =
+      chartRight - chartLeft;
 
-    // Convert epoch/value arrays into SVG path data
-    function buildPath(values, minValue, maxValue) {
+    const chartHeight =
+      chartBottom - chartTop;
+
+    // --------------------------------------------------
+    // Convert values into SVG path
+    // --------------------------------------------------
+
+    function buildPath(
+      values,
+      minValue,
+      maxValue
+    ) {
       let path = "";
+
+      if (values.length === 1) {
+        const normalized =
+          (Number(values[0]) - minValue) /
+          (maxValue - minValue);
+
+        const x = chartLeft;
+        const y =
+          chartBottom -
+          normalized * chartHeight;
+
+        return `M ${x.toFixed(2)} ${y.toFixed(2)}`;
+      }
 
       for (let i = 0; i < values.length; i++) {
 
         const x =
           chartLeft +
-          (i / (values.length - 1)) * chartWidth;
+          (i / (values.length - 1)) *
+            chartWidth;
 
         const normalized =
           (Number(values[i]) - minValue) /
@@ -2281,33 +2556,57 @@ async function loadTrainingHistory() {
       return path.trim();
     }
 
-    // Accuracy uses fixed 0–1 scale
-    const accuracyTrainPath = buildPath(
-      accuracy,
-      0,
-      1
-    );
+    // --------------------------------------------------
+    // Accuracy
+    // --------------------------------------------------
 
-    const accuracyValidationPath = buildPath(
-      valAccuracy,
-      0,
-      1
-    );
+    const accuracyTrainPath =
+      buildPath(
+        accuracy,
+        0,
+        1
+      );
 
-    // Loss uses fixed 0–0.30 scale
-    const lossTrainPath = buildPath(
-      loss,
-      0,
-      0.30
-    );
+    const accuracyValidationPath =
+      buildPath(
+        valAccuracy,
+        0,
+        1
+      );
 
-    const lossValidationPath = buildPath(
-      valLoss,
-      0,
-      0.30
-    );
+    // --------------------------------------------------
+    // Loss
+    // --------------------------------------------------
 
+    const allLossValues = [
+      ...loss,
+      ...valLoss
+    ].map(Number);
+
+    const lossMax =
+      Math.max(
+        ...allLossValues,
+        0.30
+      );
+
+    const lossTrainPath =
+      buildPath(
+        loss,
+        0,
+        lossMax
+      );
+
+    const lossValidationPath =
+      buildPath(
+        valLoss,
+        0,
+        lossMax
+      );
+
+    // --------------------------------------------------
     // Apply paths
+    // --------------------------------------------------
+
     const trainingAccuracyPath =
       document.getElementById(
         "training-accuracy-path"
@@ -2356,13 +2655,31 @@ async function loadTrainingHistory() {
       );
     }
 
+    // --------------------------------------------------
+    // Update the text below the charts
+    // --------------------------------------------------
+
+    const curveDescription =
+  document.querySelector("#training-curves-description");
+
+if (curveDescription) {
+  curveDescription.textContent =
+    `Training and validation accuracy and loss across ${epochs.length} epochs of ${winnerPhase.phase} training. Stage 1 trains the classifier head, followed by Stage 2 fine-tuning of the EfficientNetB0 backbone.`;
+}
+
     console.log(
       "Training history loaded successfully:",
       epochs.length,
       "epochs"
     );
 
+    console.log(
+      "Training curves:",
+      winnerPhase.phase
+    );
+
   } catch (error) {
+
     console.error(
       "Failed to load training history:",
       error
@@ -2370,6 +2687,5 @@ async function loadTrainingHistory() {
   }
 }
 
-loadTrainingHistory();
 </script>
 </body></html>
